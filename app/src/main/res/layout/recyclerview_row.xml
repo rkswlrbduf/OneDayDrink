@@ -13,7 +13,6 @@
         app:layout_constraintBottom_toTopOf="@+id/store_name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="#3f3f3f"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="12" />
 
