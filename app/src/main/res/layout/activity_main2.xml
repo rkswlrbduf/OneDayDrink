@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/constraint"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -21,27 +21,28 @@
         android:id="@+id/bottom_bar"
         android:layout_width="0dp"
         android:layout_height="83dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/bottom_bar"
+        app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></View>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/around_store"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#2A2E43"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        android:id="@+id/around_store"
-        android:background="#2A2E43">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/주변매장"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="52dp"
-            android:id="@+id/주변매장"
             android:text="주변 매장"
             android:textSize="40sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -49,14 +50,15 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_marginTop="40dp"
-            android:layout_height="0dp"
             android:id="@+id/recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="40dp"
+            tools:listitem="@layout/recyclerview_row"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/주변매장"
-            app:layout_constraintBottom_toBottomOf="parent"></android.support.v7.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@+id/주변매장"></android.support.v7.widget.RecyclerView>
 
     </android.support.constraint.ConstraintLayout>
 
