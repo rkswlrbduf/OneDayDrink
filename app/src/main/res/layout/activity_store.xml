@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2a2e43">
+
+    <ImageView
+        android:id="@+id/store_image"
+        android:layout_width="0dp"
+        android:layout_height="326dp"
+        android:alpha="0.52"
+        android:foreground="@drawable/image_gradient"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/store_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="140dp"
+        android:lineSpacingExtra="4sp"
+        android:text="왕코 등갈비"
+        android:textColor="#ffffff"
+        android:textSize="37sp"
+        app:fontName="Custom1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/매장소개"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="73dp"
+        android:lineSpacingExtra="3sp"
+        android:text="매장 소개"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/store_name" />
+
+    <TextView
+        android:id="@+id/store_intro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="13.8dp"
+        android:lineSpacingExtra="9sp"
+        android:text="곱창과 대창, 염통, 막창, 특양구이는 하루에 한가지 맛씩 각각의 맛을 오롯이 즐기고자 하는 분들은 단품으로도 즐길 수 있습니다. 하지만 다양한 맛을 한 번에 즐기고 싶은 분들을 위해 모둠메뉴도 다양하게 구성이 되어 있습니다."
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        app:fontName="Custom2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/매장소개" />
+
+    <View
+        android:id="@+id/경계선"
+        android:layout_width="0dp"
+        android:layout_height="1.5dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="13.9dp"
+        android:alpha="0.05"
+        android:background="#ffffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/store_intro"></View>
+
+    <ImageView
+        android:id="@+id/call_icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingLeft="17dp"
+        android:src="#353a50"
+        app:layout_constraintBottom_toTopOf="@+id/store_map"
+        app:layout_constraintHorizontal_weight="69"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/store_call"
+        app:layout_constraintTop_toBottomOf="@+id/경계선" />
+
+    <TextView
+        android:id="@+id/store_call"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:lineSpacingExtra="2sp"
+        android:paddingLeft="16dp"
+        android:text="032 - 123 - 4567"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/store_map"
+        app:layout_constraintHorizontal_weight="291"
+        app:layout_constraintLeft_toRightOf="@+id/call_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/경계선" />
+
+    <View
+        android:id="@+id/store_map"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/store_call" />
+
+</android.support.constraint.ConstraintLayout>

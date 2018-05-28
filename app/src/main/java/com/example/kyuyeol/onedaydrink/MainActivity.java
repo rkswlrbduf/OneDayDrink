@@ -1,9 +1,13 @@
 package com.example.kyuyeol.onedaydrink;
 
+import android.content.Context;
+import android.database.DatabaseErrorHandler;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.transition.AutoTransition;
 import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +18,10 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.skt.Tmap.TMapView;
+import com.tsengvn.typekit.TypekitContextWrapper;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
     boolean bottomState;
 
     RecyclerView recyclerView1;
+    AutoTransition transition;
+
+    ArrayList<String> list = new ArrayList<String>(){{
+        add("고깃집");
+        add("초밥집");
+        add("술집");
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +61,14 @@ public class MainActivity extends AppCompatActivity {
         constraintSet2 = new ConstraintSet();
         constraintSet2.clone(this, R.layout.activity_main2);
 
+        transition = new AutoTransition();
+        transition.setDuration(400);
+
         bottomState = false;
         bottomBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("TAG", "TAGGGGGG");
-                TransitionManager.beginDelayedTransition(constraintLayout);
+                TransitionManager.beginDelayedTransition(constraintLayout, transition);
                 if(bottomState) constraintSet1.applyTo(constraintLayout); else constraintSet2.applyTo(constraintLayout);
                 bottomState = !bottomState;
             }
@@ -59,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView1.setLayoutManager(layoutManager);
-        recyclerView1.setAdapter(new RecyclerViewAdapter(this));
+        recyclerView1.setAdapter(new RecyclerViewAdapter(this, list));
 
     }
 
@@ -67,9 +84,15 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if(!bottomState) super.onBackPressed();
         else {
-            TransitionManager.beginDelayedTransition(constraintLayout);
+            TransitionManager.beginDelayedTransition(constraintLayout, transition);
             constraintSet1.applyTo(constraintLayout);
             bottomState = !bottomState;
         }
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
 }

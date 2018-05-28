@@ -4,12 +4,12 @@
     android:id="@+id/small_cardview"
     android:layout_width="118dp"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:cardElevation="8dp"
     app:cardMaxElevation="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_margin="8dp"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -19,7 +19,7 @@
         android:background="#353a50">
 
         <ImageView
-            android:id="@+id/row_image"
+            android:id="@+id/store_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
@@ -37,8 +37,52 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/row_image"
+            app:layout_constraintTop_toBottomOf="@+id/store_image"
             app:layout_constraintVertical_weight="46" />
+
+        <TextView
+            android:id="@+id/store_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:lineSpacingExtra="2sp"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_image"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <LinearLayout
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_name">
+
+            <TextView
+                android:id="@+id/store_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:alpha="0.56"
+                android:lineSpacingExtra="1sp"
+                android:textColor="#ffffff"
+                android:textSize="9sp" />
+
+            <TextView
+                android:id="@+id/store_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.56"
+                android:lineSpacingExtra="1sp"
+                android:textColor="#ffffff"
+                android:textSize="9sp" />
+
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 
