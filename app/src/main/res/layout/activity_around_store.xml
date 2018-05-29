@@ -5,7 +5,7 @@
     android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity.MainActivity">
 
     <FrameLayout
         android:id="@+id/Tmap"
@@ -115,7 +115,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/big_주변매장"
-            tools:listitem="@layout/recyclerview_row"></android.support.v7.widget.RecyclerView>
+            tools:listitem="@layout/store_type_row"></android.support.v7.widget.RecyclerView>
 
     </android.support.constraint.ConstraintLayout>
 

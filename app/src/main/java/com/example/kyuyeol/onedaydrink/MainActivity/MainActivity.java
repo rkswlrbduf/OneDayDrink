@@ -1,10 +1,7 @@
-package com.example.kyuyeol.onedaydrink;
+package com.example.kyuyeol.onedaydrink.MainActivity;
 
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.transition.AutoTransition;
@@ -12,15 +9,15 @@ import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
+import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
+import com.example.kyuyeol.onedaydrink.R;
 import com.skt.Tmap.TMapView;
 import com.tsengvn.typekit.TypekitContextWrapper;
+//import com.tsengvn.typekit.TypekitContextWrapper;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         constraintSet1 = new ConstraintSet();
         constraintSet1.clone(constraintLayout);
         constraintSet2 = new ConstraintSet();
-        constraintSet2.clone(this, R.layout.activity_main2);
+        constraintSet2.clone(this, R.layout.activity_around_store);
 
         transition = new AutoTransition();
         transition.setDuration(400);
@@ -76,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView1.setLayoutManager(layoutManager);
-        recyclerView1.setAdapter(new RecyclerViewAdapter(this, list));
+        recyclerView1.setAdapter(new StoreTypeRecyclerViewAdapter(this, list));
 
     }
 

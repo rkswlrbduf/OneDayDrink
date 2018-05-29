@@ -1,115 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#2a2e43">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/store_image"
-        android:layout_width="0dp"
-        android:layout_height="326dp"
-        android:alpha="0.52"
-        android:foreground="@drawable/image_gradient"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2a2e43">
 
-    <TextView
-        android:id="@+id/store_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="140dp"
-        android:lineSpacingExtra="4sp"
-        android:text="왕코 등갈비"
-        android:textColor="#ffffff"
-        android:textSize="37sp"
-        app:fontName="Custom1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/menu_image"
+            android:layout_width="0dp"
+            android:layout_height="326dp"
+            android:alpha="0.52"
+            android:foreground="@drawable/image_gradient"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toTopOf="@+id/menu_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/매장소개"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="73dp"
-        android:lineSpacingExtra="3sp"
-        android:text="매장 소개"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/store_name" />
+        <TextView
+            android:id="@+id/menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="140dp"
+            android:lineSpacingExtra="4sp"
+            android:text="왕코 등갈비"
+            android:textColor="#ffffff"
+            android:textSize="37sp"
+            app:fontName="Custom1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/store_intro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
-        android:layout_marginTop="13.8dp"
-        android:lineSpacingExtra="9sp"
-        android:text="곱창과 대창, 염통, 막창, 특양구이는 하루에 한가지 맛씩 각각의 맛을 오롯이 즐기고자 하는 분들은 단품으로도 즐길 수 있습니다. 하지만 다양한 맛을 한 번에 즐기고 싶은 분들을 위해 모둠메뉴도 다양하게 구성이 되어 있습니다."
-        android:textColor="#ffffff"
-        android:textSize="13sp"
-        app:fontName="Custom2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/매장소개" />
+        <TextView
+            android:id="@+id/매장소개"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="73dp"
+            android:lineSpacingExtra="3sp"
+            android:text="매장 소개"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_name"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <View
-        android:id="@+id/경계선"
-        android:layout_width="0dp"
-        android:layout_height="1.5dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
-        android:layout_marginTop="13.9dp"
-        android:alpha="0.05"
-        android:background="#ffffff"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/store_intro"></View>
+        <TextView
+            android:id="@+id/store_intro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="13.8dp"
+            android:lineSpacingExtra="9sp"
+            android:text="곱창과 대창, 염통, 막창, 특양구이는 하루에 한가지 맛씩 각각의 맛을 오롯이 즐기고자 하는 분들은 단품으로도 즐길 수 있습니다. 하지만 다양한 맛을 한 번에 즐기고 싶은 분들을 위해 모둠메뉴도 다양하게 구성이 되어 있습니다."
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:fontName="Custom2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/매장소개"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <ImageView
-        android:id="@+id/call_icon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingLeft="17dp"
-        android:src="#353a50"
-        app:layout_constraintBottom_toTopOf="@+id/store_map"
-        app:layout_constraintHorizontal_weight="69"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/store_call"
-        app:layout_constraintTop_toBottomOf="@+id/경계선" />
+        <View
+            android:id="@+id/경계선1"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="13.9dp"
+            android:alpha="0.05"
+            android:background="#ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_intro"></View>
 
-    <TextView
-        android:id="@+id/store_call"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:lineSpacingExtra="2sp"
-        android:paddingLeft="16dp"
-        android:text="032 - 123 - 4567"
-        android:textColor="#ffffff"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/store_map"
-        app:layout_constraintHorizontal_weight="291"
-        app:layout_constraintLeft_toRightOf="@+id/call_icon"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/경계선" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/store_call_container"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/경계선1">
 
-    <View
-        android:id="@+id/store_map"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/store_call" />
+            <ImageView
+                android:id="@+id/call_icon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="17dp"
+                android:background="#353a50"
+                android:padding="10dp"
+                android:src="@mipmap/ic_launcher_round"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintHorizontal_weight="52"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/store_call"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/store_call"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="2sp"
+                android:paddingLeft="16dp"
+                android:text="032 - 123 - 4567"
+                android:textColor="#ffffff"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="291"
+                app:layout_constraintLeft_toRightOf="@+id/call_icon"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/경계선2"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="13.9dp"
+            android:alpha="0.05"
+            android:background="#ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_call_container" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/store_address_container"
+            android:layout_width="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/경계선2">
+
+            <TextView
+                android:id="@+id/위치"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="17dp"
+                android:text="위치"
+                android:textColor="#EEEEEE"
+                android:textSize="17sp"
+                app:fontName="Custom1"
+                app:layout_constraintBottom_toTopOf="@+id/영업시간"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/store_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="17dp"
+                android:text="인천대학교 미추홀캠퍼스"
+                android:textColor="#EEEEEE"
+                android:textSize="17sp"
+                app:fontName="Custom1"
+                app:layout_constraintBottom_toTopOf="@+id/store_weekday_opening"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/영업시간"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="17dp"
+                android:text="영업시간"
+                android:textColor="#EEEEEE"
+                android:textSize="17sp"
+                app:fontName="Custom1"
+                app:layout_constraintBottom_toTopOf="@+id/store_weekend_opening"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/위치" />
+
+            <TextView
+                android:id="@+id/store_weekday_opening"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="17dp"
+                android:text="평일 9:00 ~ 24:00"
+                android:textColor="#EEEEEE"
+                android:textSize="17sp"
+                app:fontName="Custom1"
+                app:layout_constraintBottom_toTopOf="@+id/store_weekend_opening"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/store_address" />
+
+            <TextView
+                android:id="@+id/store_weekend_opening"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="17dp"
+                android:text="주말 9:00 ~ 24:00"
+                android:textColor="#EEEEEE"
+                android:textSize="17sp"
+                app:fontName="Custom1"
+                app:layout_constraintBottom_toTopOf="@+id/store_free_opening"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/store_weekday_opening" />
+
+            <TextView
+                android:id="@+id/store_free_opening"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="17dp"
+                android:text="휴무 매주 월요일"
+                android:textColor="#EEEEEE"
+                android:textSize="17sp"
+                app:fontName="Custom1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/store_weekend_opening" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/store_map"
+            android:layout_width="371dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:background="#ff8800"
+            app:layout_constraintDimensionRatio="2:0.8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_address_container" />
+
+        <View
+            android:id="@+id/경계선3"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="13.9dp"
+            android:alpha="0.05"
+            android:background="#ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_map" />
+
+        <TextView
+            android:id="@+id/추천메뉴"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="17dp"
+            android:text="추천메뉴"
+            android:textColor="#EEEEEE"
+            android:textSize="17sp"
+            app:fontName="Custom1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/경계선3" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/store_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/추천메뉴" />
+
+        <View
+            android:id="@+id/경계선4"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="13.9dp"
+            android:alpha="0.05"
+            android:background="#ffffff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_menu" />
+
+        <TextView
+            android:id="@+id/제공주류"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제공 주류"
+            android:layout_marginTop="10dp"
+            android:textColor="#EEEEEE"
+            android:textSize="17sp"
+            app:fontName="Custom1"
+            android:layout_marginLeft="17dp"
+            app:layout_constraintBottom_toTopOf="@+id/store_drink"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/경계선4" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/store_drink"
+            android:layout_width="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/제공주류" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

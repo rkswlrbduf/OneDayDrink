@@ -1,4 +1,4 @@
-package com.example.kyuyeol.onedaydrink
+package com.example.kyuyeol.onedaydrink.Font
 
 import android.app.Application
 import com.tsengvn.typekit.Typekit
