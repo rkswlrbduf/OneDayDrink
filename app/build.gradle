@@ -35,4 +35,5 @@ dependencies {
     implementation files('libs/com.skt.Tmap_1.52.jar')
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.github.katoro:typekit:1.0.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 }

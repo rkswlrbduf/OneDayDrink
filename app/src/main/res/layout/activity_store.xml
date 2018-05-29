@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -7,25 +7,26 @@
     <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:descendantFocusability="blocksDescendants"
         android:layout_height="match_parent"
         android:background="#2a2e43">
 
         <ImageView
-            android:id="@+id/menu_image"
+            android:id="@+id/drink_image"
             android:layout_width="0dp"
             android:layout_height="326dp"
             android:alpha="0.52"
             android:foreground="@drawable/image_gradient"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
-            app:layout_constraintBottom_toTopOf="@+id/menu_name"
+            app:layout_constraintBottom_toTopOf="@+id/drink_name"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/menu_name"
+            android:id="@+id/drink_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="23dp"
@@ -51,7 +52,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/menu_name"
+            app:layout_constraintTop_toBottomOf="@+id/drink_name"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
@@ -276,9 +277,16 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/store_menu"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            tools:listitem="@layout/store_menu_row"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="17dp"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            android:layout_height="wrap_content"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintHeight_default="wrap"
+            app:spanCount="2"
+            android:nestedScrollingEnabled="false"
+            android:focusable="false"
             android:layout_marginRight="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -315,6 +323,8 @@
             android:id="@+id/store_drink"
             android:layout_width="0dp"
             android:layout_marginTop="10dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="@layout/store_drink_row"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
             android:orientation="horizontal"
@@ -327,4 +337,4 @@
 
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
