@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/menu_cardview"
-    android:layout_width="118dp"
-    android:layout_gravity="center"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_gravity="center"
+    android:layout_margin="20dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="8dp"
     app:cardMaxElevation="8dp"
@@ -41,35 +41,43 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drink_image"
-            app:layout_constraintVertical_weight="46" />
+            app:layout_constraintVertical_weight="30" />
 
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/drink_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="3dp"
             android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            app:fontName="Custom1"
+            android:autoSizeTextType="uniform"
             android:lineSpacingExtra="2sp"
             android:textColor="#ffffff"
-            android:textSize="10sp"
-            tools:text="감자 튀김"
             app:layout_constraintBottom_toTopOf="@+id/menu_price"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drink_image"
-            android:layout_marginBottom="3dp"
-            app:layout_constraintVertical_chainStyle="packed" />
+            tools:text="감자 튀김" />
 
         <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/menu_price"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="12dp"
+            android:autoSizeTextType="uniform"
+            android:textStyle="bold"
+            android:layout_marginRight="12dp"
             android:lineSpacingExtra="2sp"
             android:textColor="#ffffff"
-            android:textSize="10sp"
-            tools:text="5000원"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/drink_name">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/drink_name"
+            tools:text="5000원">
 
         </TextView>
 

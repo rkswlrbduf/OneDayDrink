@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:descendantFocusability="blocksDescendants"
         android:layout_height="match_parent"
-        android:background="#2a2e43">
+        android:background="#2a2e43"
+        android:descendantFocusability="blocksDescendants">
 
         <ImageView
             android:id="@+id/drink_image"
@@ -144,8 +145,8 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/store_address_container"
             android:layout_width="0dp"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/경계선2">
@@ -238,10 +239,10 @@
         <View
             android:id="@+id/store_map"
             android:layout_width="371dp"
-            android:layout_marginTop="10dp"
             android:layout_height="0dp"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
+            android:layout_marginTop="10dp"
             android:background="#ff8800"
             app:layout_constraintDimensionRatio="2:0.8"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -265,8 +266,8 @@
             android:id="@+id/추천메뉴"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="17dp"
+            android:layout_marginTop="10dp"
             android:text="추천메뉴"
             android:textColor="#EEEEEE"
             android:textSize="17sp"
@@ -277,20 +278,20 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/store_menu"
             android:layout_width="0dp"
-            tools:listitem="@layout/store_menu_row"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="17dp"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
             android:layout_height="wrap_content"
-            app:layout_constrainedHeight="true"
-            app:layout_constraintHeight_default="wrap"
-            app:spanCount="2"
-            android:nestedScrollingEnabled="false"
-            android:focusable="false"
+            android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:focusable="false"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layout_constraintHeight_default="wrap"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/추천메뉴" />
+            app:layout_constraintTop_toBottomOf="@+id/추천메뉴"
+            app:spanCount="2"
+            tools:listitem="@layout/store_menu_row" />
 
         <View
             android:id="@+id/경계선4"
@@ -309,12 +310,12 @@
             android:id="@+id/제공주류"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="제공 주류"
+            android:layout_marginLeft="17dp"
             android:layout_marginTop="10dp"
+            android:text="제공 주류"
             android:textColor="#EEEEEE"
             android:textSize="17sp"
             app:fontName="Custom1"
-            android:layout_marginLeft="17dp"
             app:layout_constraintBottom_toTopOf="@+id/store_drink"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/경계선4" />
@@ -322,19 +323,19 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/store_drink"
             android:layout_width="0dp"
-            android:layout_marginTop="10dp"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="@layout/store_drink_row"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:layout_height="wrap_content"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/제공주류" />
+            app:layout_constraintTop_toBottomOf="@+id/제공주류"
+            tools:listitem="@layout/store_drink_row" />
 
 
     </android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.NestedScrollView>
+</ScrollView>
