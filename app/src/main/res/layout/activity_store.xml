@@ -51,7 +51,7 @@
             android:text="매장 소개"
             android:textColor="#ffffff"
             android:textSize="20sp"
-            android:textStyle="bold"
+            app:fontName="Custom1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drink_name"
             app:layout_constraintVertical_chainStyle="packed" />
@@ -146,7 +146,7 @@
             android:id="@+id/store_address_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/경계선2">
@@ -155,12 +155,12 @@
                 android:id="@+id/위치"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="17dp"
                 android:text="위치"
                 android:textColor="#EEEEEE"
                 android:textSize="17sp"
-                app:fontName="Custom1"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/영업시간"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -169,12 +169,12 @@
                 android:id="@+id/store_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="17dp"
                 android:text="인천대학교 미추홀캠퍼스"
                 android:textColor="#EEEEEE"
                 android:textSize="17sp"
-                app:fontName="Custom1"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/store_weekday_opening"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -183,12 +183,12 @@
                 android:id="@+id/영업시간"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="17dp"
                 android:text="영업시간"
                 android:textColor="#EEEEEE"
                 android:textSize="17sp"
-                app:fontName="Custom1"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/store_weekend_opening"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/위치" />
@@ -197,12 +197,12 @@
                 android:id="@+id/store_weekday_opening"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="17dp"
                 android:text="평일 9:00 ~ 24:00"
                 android:textColor="#EEEEEE"
                 android:textSize="17sp"
-                app:fontName="Custom1"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/store_weekend_opening"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/store_address" />
@@ -211,12 +211,12 @@
                 android:id="@+id/store_weekend_opening"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="17dp"
                 android:text="주말 9:00 ~ 24:00"
                 android:textColor="#EEEEEE"
                 android:textSize="17sp"
-                app:fontName="Custom1"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/store_free_opening"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/store_weekday_opening" />
@@ -229,25 +229,32 @@
                 android:text="휴무 매주 월요일"
                 android:textColor="#EEEEEE"
                 android:textSize="17sp"
-                app:fontName="Custom1"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/store_weekend_opening" />
 
         </android.support.constraint.ConstraintLayout>
 
-        <View
-            android:id="@+id/store_map"
-            android:layout_width="371dp"
+        <android.support.v7.widget.CardView
+            android:id="@+id/store_map_container"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
-            android:layout_marginTop="10dp"
-            android:background="#ff8800"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="10dp"
             app:layout_constraintDimensionRatio="2:0.8"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/store_address_container" />
+            app:layout_constraintTop_toBottomOf="@+id/store_address_container">
+
+            <FrameLayout
+                android:id="@+id/store_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v7.widget.CardView>
 
         <View
             android:id="@+id/경계선3"
@@ -260,7 +267,7 @@
             android:background="#ffffff"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/store_map" />
+            app:layout_constraintTop_toBottomOf="@+id/store_map_container" />
 
         <TextView
             android:id="@+id/추천메뉴"
@@ -282,9 +289,9 @@
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
             android:layout_marginTop="10dp"
-            android:padding="5dp"
             android:focusable="false"
             android:nestedScrollingEnabled="false"
+            android:padding="5dp"
             app:layoutManager="android.support.v7.widget.GridLayoutManager"
             app:layout_constraintHeight_default="wrap"
             app:layout_constraintLeft_toLeftOf="parent"

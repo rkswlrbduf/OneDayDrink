@@ -2,16 +2,15 @@ package com.example.kyuyeol.onedaydrink.StoreActivity
 
 import android.content.Context
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.view.ViewGroup
 import com.example.kyuyeol.onedaydrink.R
 import com.example.kyuyeol.onedaydrink.StoreActivity.Adapter.StoreDrinkRecyclerViewAdapter
 import com.example.kyuyeol.onedaydrink.StoreActivity.Adapter.StoreMenuRecyclerViewAdapter
 import com.example.kyuyeol.onedaydrink.StoreActivity.StoreClass.DrinkInform
 import com.example.kyuyeol.onedaydrink.StoreActivity.StoreClass.MenuInform
+import com.skt.Tmap.TMapView
 import com.tsengvn.typekit.TypekitContextWrapper
 import kotlinx.android.synthetic.main.activity_store.*
 
@@ -32,6 +31,10 @@ class StoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store)
+
+        val tmapview = TMapView(this)
+        tmapview.setSKTMapApiKey("df15431c-c688-49f4-b53a-6e5f56f0ed90")
+        store_map.addView(tmapview)
 
         store_menu.layoutManager = GridLayoutManager(this, 2)
         store_menu.adapter = StoreMenuRecyclerViewAdapter(this, menuList)
