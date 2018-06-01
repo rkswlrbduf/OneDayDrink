@@ -10,15 +10,13 @@ import android.support.transition.TransitionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toolbar;
 
-import com.balysv.materialmenu.MaterialMenu;
 import com.balysv.materialmenu.MaterialMenuDrawable;
+import com.example.kyuyeol.onedaydrink.FirebaseMessaging.mFirebaseInstanceIDService;
 import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
 import com.example.kyuyeol.onedaydrink.R;
 import com.skt.Tmap.TMapView;
@@ -75,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
         materialMenu = new MaterialMenuDrawable(this, Color.GRAY, MaterialMenuDrawable.Stroke.THIN);
         mainMenu.setImageDrawable(materialMenu);
+
+        (new mFirebaseInstanceIDService()).onTokenRefresh();
 
         final SlidingRootNav slidingRootNav = new SlidingRootNavBuilder(this)
                 .addDragListener(new DragListener() {

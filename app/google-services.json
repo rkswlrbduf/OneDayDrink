@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "127279302599",
+    "firebase_url": "https://sulje2018.firebaseio.com",
+    "project_id": "sulje2018",
+    "storage_bucket": "sulje2018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127279302599:android:1752c18a6b11b4c2",
+        "android_client_info": {
+          "package_name": "com.example.kyuyeol.onedaydrink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127279302599-4389622ls40cctje0cduc6ihl71ppask.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kyuyeol.onedaydrink",
+            "certificate_hash": "bf14ded9b3945750e56e4314c27fbd532ffec7e4"
+          }
+        },
+        {
+          "client_id": "127279302599-uavppi99fees1nvp9ni00mkvoho8sn94.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "127279302599-uavppi99fees1nvp9ni00mkvoho8sn94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhzupNNR14L4OiOqjW8GC1KogEdcFuL_k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127279302599-uavppi99fees1nvp9ni00mkvoho8sn94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

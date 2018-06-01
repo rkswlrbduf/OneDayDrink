@@ -20,6 +20,24 @@
             </intent-filter>
         </activity>
         <activity android:name=".StoreActivity.StoreActivity" android:theme="@style/AppTheme"/>
+        <service
+            android:name=".FirebaseMessaging.mFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".FirebaseMessaging.mFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name=".FirebaseMessaging.mJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
