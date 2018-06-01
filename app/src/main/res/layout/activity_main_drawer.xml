@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/drawer_guide1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/drawer_guide2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/drawer_guide3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.28" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/drawer_guide4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <TextView
+        android:id="@+id/절약한금액"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingStart="24dp"
+        android:text="절약한 금액"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/drawer_guide4"
+        app:layout_constraintTop_toBottomOf="@+id/drawer_guide1" />
+
+    <TextView
+        android:id="@+id/drawer_save_money"
+        android:layout_width="135dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="50dp"
+        android:autoSizeMinTextSize="34dp"
+        android:autoSizeTextType="uniform"
+        android:maxLines="1"
+        android:paddingLeft="24dp"
+        android:paddingStart="24dp"
+        android:text="4000"
+        app:layout_constraintBottom_toBottomOf="@+id/drawer_guide3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/drawer_save_money_unit"
+        app:layout_constraintTop_toTopOf="@+id/drawer_guide2" />
+
+    <TextView
+        android:id="@+id/drawer_save_money_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoSizeMaxTextSize="20dp"
+        android:autoSizeTextType="uniform"
+        android:text="원"
+        app:layout_constraintBottom_toTopOf="@+id/drawer_guide3"
+        app:layout_constraintLeft_toRightOf="@+id/drawer_save_money"
+        app:layout_constraintRight_toLeftOf="@+id/drawer_guide4"
+        app:layout_constraintTop_toBottomOf="@+id/drawer_guide2" />
+
+
+    <TextView
+        android:id="@+id/darwer_text1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="25sp"
+        android:autoSizeTextType="uniform"
+        android:background="#2a2e43"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="카테고리 1"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/darwer_text2"
+        app:layout_constraintDimensionRatio="1:0.18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawer_guide3" />
+
+    <TextView
+        android:id="@+id/darwer_text2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="25sp"
+        android:autoSizeTextType="uniform"
+        android:background="#2a2e43"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="카테고리 2"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/darwer_text3"
+        app:layout_constraintDimensionRatio="1:0.18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darwer_text1" />
+
+    <TextView
+        android:id="@+id/darwer_text3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="25sp"
+        android:autoSizeTextType="uniform"
+        android:background="#2a2e43"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="카테고리 3"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/darwer_text4"
+        app:layout_constraintDimensionRatio="1:0.18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darwer_text2" />
+
+    <TextView
+        android:id="@+id/darwer_text4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="25sp"
+        android:autoSizeTextType="uniform"
+        android:background="#2a2e43"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="카테고리 4"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/drawer_guide5"
+        app:layout_constraintDimensionRatio="1:0.18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/darwer_text3" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/drawer_guide5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+
+</android.support.constraint.ConstraintLayout>

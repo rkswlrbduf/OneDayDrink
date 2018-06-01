@@ -162,30 +162,38 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/around_store_back"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="15dp"
             android:src="@drawable/left_arrow"
-            app:layout_constraintBottom_toTopOf="@+id/big_주변매장"
+            app:layout_constraintBottom_toTopOf="@+id/around_store_guide"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/around_store_filter"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/around_store_filter"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginRight="17dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/filter"
-            app:layout_constraintBottom_toTopOf="@+id/big_주변매장"
+            app:layout_constraintBottom_toTopOf="@+id/around_store_guide"
             app:layout_constraintLeft_toRightOf="@+id/around_store_back"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/around_store_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08"/>
 
         <TextView
             android:id="@+id/big_주변매장"
@@ -200,7 +208,7 @@
             android:textSize="40sp"
             app:fontName="Custom1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/around_store_back" />
+            app:layout_constraintTop_toBottomOf="@+id/around_store_guide" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
