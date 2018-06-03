@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".MainActivity.MainActivity">
+        <activity android:name=".SignActivity.SignActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".StoreActivity.StoreActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".MainActivity.MainActivity" android:theme="@style/AppTheme"/>
         <service
             android:name=".FirebaseMessaging.mFirebaseMessagingService">
             <intent-filter>
