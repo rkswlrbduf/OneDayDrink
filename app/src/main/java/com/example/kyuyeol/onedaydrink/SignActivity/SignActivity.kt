@@ -25,6 +25,7 @@ import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.AuthResult
 import android.support.annotation.NonNull
+import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.AuthCredential
 import com.facebook.AccessToken
@@ -118,12 +119,10 @@ class SignActivity : AppCompatActivity() {
         callback = SessionCallback()
         Session.getCurrentSession().addCallback(callback)
 
-        requestMe()
-
         kakao_logout.setOnClickListener({ v ->
             UserManagement.getInstance().requestLogout(object : LogoutResponseCallback() {
                 override fun onCompleteLogout() {
-                    Log.d(TAG, "Redirect Login Activity")
+                    redirectLoginActivity()
                 }
             })
         })
@@ -232,19 +231,21 @@ class SignActivity : AppCompatActivity() {
                 if (result == ApiErrorCode.CLIENT_ERROR_CODE) {
                     finish()
                 } else {
-                    Log.d(TAG,"Redirect Login Activity")
+                    redirectLoginActivity()
+                    Log.d(TAG, "NUM1")
                 }
             }
 
             override fun onSessionClosed(errorResult: ErrorResult) {
-                Log.e(TAG, "Redirect Login Activity")
+                redirectLoginActivity()
+                Log.d(TAG, "NUM2" + errorResult.errorMessage)
             }
 
             override fun onSuccess(result: MeV2Response) {
                 if (result.hasSignedUp() == OptionalBoolean.FALSE) {
-                    Log.d(TAG, "Show Signup")
+
                 } else {
-                    Log.d(TAG, "Redirect Main Activity")
+                    redirectMainActivity()
                 }
             }
         })
@@ -262,6 +263,20 @@ class SignActivity : AppCompatActivity() {
                 Log.e(TAG, exception.message + "   ㄴㅇㄴ")
             }
         }
+    }
+
+    private fun redirectMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        Log.d(TAG, "redirectMainActivity")
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
+    private fun redirectLoginActivity() {
+        val intent = Intent(this, SignActivity::class.java)
+        Log.d(TAG, "redirectLoginActivity")
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
     }
 
     override fun attachBaseContext(newBase: Context) {
