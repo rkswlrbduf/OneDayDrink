@@ -1,8 +1,10 @@
 package com.example.kyuyeol.onedaydrink.MainActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.transition.AutoTransition;
@@ -19,6 +21,17 @@ import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.example.kyuyeol.onedaydrink.FirebaseMessaging.mFirebaseInstanceIDService;
 import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
 import com.example.kyuyeol.onedaydrink.R;
+import com.example.kyuyeol.onedaydrink.SignActivity.SignActivity;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.skt.Tmap.TMapView;
 import com.tsengvn.typekit.TypekitContextWrapper;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
@@ -51,9 +64,14 @@ public class MainActivity extends AppCompatActivity {
     }};
 
     ImageView mainMenu;
-    MaterialMenuDrawable  materialMenu;
+    MaterialMenuDrawable materialMenu;
     ImageButton backButton;
     ImageButton filterButton;
+
+    String CLIENT_ID = "127279302599-ujilbih6vd4cqkclqqd2crp0iahusbpc.apps.googleusercontent.com";
+
+    GoogleSignInClient mGoogleSignInAccount;
+    GoogleSignInOptions gso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView1 = (RecyclerView) findViewById(R.id.recyclerview);
 
         mainMenu = (ImageView) findViewById(R.id.main_menu);
-        backButton = (ImageButton)findViewById(R.id.around_store_back);
-        filterButton = (ImageButton)findViewById(R.id.around_store_filter);
+        backButton = (ImageButton) findViewById(R.id.around_store_back);
+        filterButton = (ImageButton) findViewById(R.id.around_store_filter);
 
         materialMenu = new MaterialMenuDrawable(this, Color.GRAY, MaterialMenuDrawable.Stroke.THIN);
         mainMenu.setImageDrawable(materialMenu);
@@ -95,6 +113,30 @@ public class MainActivity extends AppCompatActivity {
                 .withRootViewElevation(3)
                 .withRootViewYTranslation(3)
                 .inject();
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(CLIENT_ID)
+                .requestEmail()
+                .build();
+        mGoogleSignInAccount = GoogleSignIn.getClient(MainActivity.this, gso);
+
+        slidingRootNav.getLayout().findViewById(R.id.darwer_text4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                    @Override
+                    public void onCompleteLogout() {
+                        FirebaseAuth.getInstance().signOut();
+                        googleSignOut(); //google
+                        LoginManager.getInstance().logOut();
+                        Intent intent = new Intent(MainActivity.this, SignActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+
+                    }
+                });
+            }
+        });
 
         TMapView tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("df15431c-c688-49f4-b53a-6e5f56f0ed90");
@@ -147,7 +189,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    public void googleSignOut() {
+        mGoogleSignInAccount.signOut().addOnCompleteListener(MainActivity.this, null);
     }
 
     @Override

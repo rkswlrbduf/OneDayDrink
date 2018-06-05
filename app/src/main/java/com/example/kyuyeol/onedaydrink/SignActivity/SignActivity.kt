@@ -21,26 +21,18 @@ import com.tsengvn.typekit.TypekitContextWrapper
 import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.auth.GoogleAuthProvider
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.AuthResult
-import android.support.annotation.NonNull
 import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
 import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.AuthCredential
-import com.facebook.AccessToken
-import com.google.android.gms.tasks.OnCompleteListener
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.ApiErrorCode
 import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.LogoutResponseCallback
 import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.OptionalBoolean
 import com.kakao.util.exception.KakaoException
-import com.kakao.util.helper.log.Logger
+import java.util.*
 
 
 class SignActivity : AppCompatActivity() {
@@ -48,18 +40,19 @@ class SignActivity : AppCompatActivity() {
     val CLIENT_ID = "127279302599-ujilbih6vd4cqkclqqd2crp0iahusbpc.apps.googleusercontent.com"
     val RC_SIGN_IN = 1001
     val TAG = "SignActivity_Log"
+    val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    val callbackManager: CallbackManager = CallbackManager.Factory.create()
+    val callback: SessionCallback = SessionCallback()
 
     lateinit var mGoogleSignInAccount: GoogleSignInClient
-    lateinit var mAuth: FirebaseAuth
-    lateinit var callbackManager: CallbackManager
-    private lateinit var callback: SessionCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
 
+        /**
+         * 구글
+         */
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(CLIENT_ID)
                 .requestEmail()
@@ -67,31 +60,30 @@ class SignActivity : AppCompatActivity() {
 
         mGoogleSignInAccount = GoogleSignIn.getClient(this, gso)
 
-        val account = GoogleSignIn.getLastSignedInAccount(this) // null이 아니면 다음 액티비티로 전환하는 알고리즘 짜야됨
-
         google_login.setSize(SignInButton.SIZE_STANDARD)
         google_login.setOnClickListener({ v -> signIn() })
 
-        mAuth = FirebaseAuth.getInstance()
-
-        google_logout.setOnClickListener({ v ->
-            mAuth.signOut()
-            mGoogleSignInAccount.signOut().addOnCompleteListener(this, { v -> null })
-        })
-
-        /*FaceBook Start*/
+        /**
+         * 페이스북
+         */
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
-        callbackManager = CallbackManager.Factory.create();
-
-        facebook_login.setReadPermissions("email", "public_profile")
-
-        // Callback registration
+        facebook_login.setReadPermissions(Arrays.asList("user_status", "public_profile", "email"))
         facebook_login.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
-                Log.d(TAG, "FACEBOOK WORK : " + loginResult.accessToken)
-                handleFacebookAccessToken(loginResult.getAccessToken());
+                Log.d(TAG, "handleFacebook")
+                val credential = FacebookAuthProvider.getCredential(loginResult.getAccessToken().token)
+                mAuth.signInWithCredential(credential)
+                        .addOnCompleteListener({ task ->
+                            if (task.isSuccessful) {
+                                redirectMainActivity()
+                                Log.d(TAG, "REDIRECT+")
+                                val user = mAuth.currentUser
+                            } else {
+
+                            }
+                        })
             }
 
             override fun onCancel() {
@@ -103,29 +95,10 @@ class SignActivity : AppCompatActivity() {
             }
         })
 
-        val accessToken = AccessToken.getCurrentAccessToken();
-        val isLoggedIn = accessToken != null && !accessToken.isExpired();
-
-        facebook_logout.setOnClickListener({ v ->
-            mAuth.signOut()
-        })
-
-        /*FaceBook End*/
-
-
         /**
          * 카카오톡
          */
-        callback = SessionCallback()
         Session.getCurrentSession().addCallback(callback)
-
-        kakao_logout.setOnClickListener({ v ->
-            UserManagement.getInstance().requestLogout(object : LogoutResponseCallback() {
-                override fun onCompleteLogout() {
-                    redirectLoginActivity()
-                }
-            })
-        })
 
     }
 
@@ -134,10 +107,9 @@ class SignActivity : AppCompatActivity() {
         Session.getCurrentSession().removeCallback(callback)
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = mAuth.currentUser
-    }
+    /**
+     * 구글
+     */
 
     fun signIn() {
         val signInIntent = mGoogleSignInAccount.getSignInIntent()
@@ -148,38 +120,11 @@ class SignActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             firebaseAuthWithGoogle(account)
+            redirectMainActivity()
             Toast.makeText(this, "Email : " + account.email, Toast.LENGTH_SHORT).show()
-            Log.d(TAG, "GOOGLE WORK")
         } catch (e: ApiException) {
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode())
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-
-        /**
-         * 구글
-         */
-        if (requestCode == RC_SIGN_IN) {
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
-
-        /**
-         * 페이스북
-         */
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-
-        /**
-         * 카카오톡
-         */
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            return
-        }
-
-        super.onActivityResult(requestCode, resultCode, data)
-
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
@@ -201,25 +146,9 @@ class SignActivity : AppCompatActivity() {
                 })
     }
 
-    private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
-
-        val credential = FacebookAuthProvider.getCredential(token.token)
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener({ task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success")
-                        val user = mAuth.currentUser
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithCredential:failure", task.exception)
-                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
-                    }
-                })
-    }
-
-    /** 카카오톡 로그인 */
+    /**
+     * 카카오톡
+     */
 
     protected fun requestMe() {
         UserManagement.getInstance().me(object : MeV2ResponseCallback() {
@@ -251,19 +180,22 @@ class SignActivity : AppCompatActivity() {
         })
     }
 
-    private inner class SessionCallback : ISessionCallback {
+    inner class SessionCallback : ISessionCallback {
 
         override fun onSessionOpened() {
-            Log.d(TAG, "Kakao Session Opened")
             requestMe()
         }
 
         override fun onSessionOpenFailed(exception: KakaoException?) {
             if (exception != null) {
-                Log.e(TAG, exception.message + "   ㄴㅇㄴ")
+                Log.e(TAG, exception.message)
             }
         }
     }
+
+    /**
+     * 리다이렉트
+     */
 
     private fun redirectMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
@@ -279,8 +211,43 @@ class SignActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    /**
+     * 폰트 설정
+     */
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase))
+    }
+
+    /**
+     * onActivityResult
+     */
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        /**
+         * 카카오톡
+         */
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return
+        }
+
+        /**
+         * 구글
+         */
+        if (requestCode == RC_SIGN_IN) {
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        } else {
+            /**
+             * 페이스북
+             */
+            callbackManager.onActivityResult(requestCode, resultCode, data)
+
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+
     }
 
 }
