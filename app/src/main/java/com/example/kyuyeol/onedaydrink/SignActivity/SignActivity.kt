@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.android.synthetic.main.activity_sign.*
 import android.content.Intent
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.facebook.*
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -35,7 +36,7 @@ import com.kakao.util.exception.KakaoException
 import java.util.*
 
 
-class SignActivity : AppCompatActivity() {
+class SignActivity : AppCompatActivity(), View.OnClickListener {
 
     val CLIENT_ID = "127279302599-ujilbih6vd4cqkclqqd2crp0iahusbpc.apps.googleusercontent.com"
     val RC_SIGN_IN = 1001
@@ -46,9 +47,27 @@ class SignActivity : AppCompatActivity() {
 
     lateinit var mGoogleSignInAccount: GoogleSignInClient
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.google_login_custom -> {
+                signIn()
+            }
+            R.id.facebook_login_custom -> {
+                facebook_login.performClick()
+            }
+            R.id.kakao_login_custom -> {
+                kakao_login.performClick()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
+
+        google_login_custom.setOnClickListener(this)
+        facebook_login_custom.setOnClickListener(this)
+        kakao_login_custom.setOnClickListener(this)
 
         /**
          * 구글
@@ -59,9 +78,6 @@ class SignActivity : AppCompatActivity() {
                 .build()
 
         mGoogleSignInAccount = GoogleSignIn.getClient(this, gso)
-
-        google_login.setSize(SignInButton.SIZE_STANDARD)
-        google_login.setOnClickListener({ v -> signIn() })
 
         /**
          * 페이스북
@@ -78,7 +94,6 @@ class SignActivity : AppCompatActivity() {
                         .addOnCompleteListener({ task ->
                             if (task.isSuccessful) {
                                 redirectMainActivity()
-                                Log.d(TAG, "REDIRECT+")
                                 val user = mAuth.currentUser
                             } else {
 
@@ -121,7 +136,6 @@ class SignActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
             firebaseAuthWithGoogle(account)
             redirectMainActivity()
-            Toast.makeText(this, "Email : " + account.email, Toast.LENGTH_SHORT).show()
         } catch (e: ApiException) {
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode())
         }
