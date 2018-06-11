@@ -3,32 +3,35 @@ package com.example.kyuyeol.onedaydrink.MainActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.transition.AutoTransition;
 import android.support.transition.TransitionManager;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.ChangeBounds;
+import android.transition.Fade;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.example.kyuyeol.onedaydrink.FirebaseMessaging.mFirebaseInstanceIDService;
 import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
 import com.example.kyuyeol.onedaydrink.R;
+import com.example.kyuyeol.onedaydrink.SearchActivity.SearchActivity;
 import com.example.kyuyeol.onedaydrink.SignActivity.SignActivity;
-import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
@@ -37,7 +40,6 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.yarolegovich.slidingrootnav.callback.DragListener;
-//import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 
@@ -72,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInAccount;
     GoogleSignInOptions gso;
+    TextView mainSearchText;
+    CardView mainSearch;
+
+    SlidingRootNav slidingRootNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +95,15 @@ public class MainActivity extends AppCompatActivity {
         backButton = (ImageButton) findViewById(R.id.around_store_back);
         filterButton = (ImageButton) findViewById(R.id.around_store_filter);
 
+        mainSearchText = (TextView) findViewById(R.id.main_search);
+        mainSearch = (CardView) findViewById(R.id.main_search_container_cardview);
+
         materialMenu = new MaterialMenuDrawable(this, Color.GRAY, MaterialMenuDrawable.Stroke.THIN);
         mainMenu.setImageDrawable(materialMenu);
 
         (new mFirebaseInstanceIDService()).onTokenRefresh();
 
-        final SlidingRootNav slidingRootNav = new SlidingRootNavBuilder(this)
+        slidingRootNav = new SlidingRootNavBuilder(this)
                 .addDragListener(new DragListener() {
                     @Override
                     public void onDrag(float progress) {
@@ -176,6 +185,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        mainSearchText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(MainActivity.this, (View) mainSearch, "main_search_transition");
+                    startActivity(intent, options.toBundle());
+                } else {
+                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
