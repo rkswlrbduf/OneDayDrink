@@ -16,9 +16,11 @@ import android.transition.ChangeBounds
 import android.transition.ChangeTransform
 import android.transition.Fade
 import android.view.View
+import android.widget.Filter
+import android.widget.Filterable
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity(), Filterable {
 
     lateinit var slidingRootNav: SlidingRootNav
 
@@ -57,5 +59,7 @@ class SearchActivity : AppCompatActivity() {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase))
     }
 
-
+    override fun getFilter(): Filter {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
