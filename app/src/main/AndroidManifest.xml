@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchActivity.SearchActivity" android:theme="@style/AppTheme"/>
-
+        <activity android:name=".BookMarkActivity.BookMarkActivity"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyALvPhOZ8065OwAb-tnHNX1kI4YoWGlkso"/>

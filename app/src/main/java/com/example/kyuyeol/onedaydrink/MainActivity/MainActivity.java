@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
+import com.example.kyuyeol.onedaydrink.BookMarkActivity.BookMarkActivity;
 import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
 import com.example.kyuyeol.onedaydrink.R;
 import com.example.kyuyeol.onedaydrink.SearchActivity.SearchActivity;
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     boolean bottomState;
 
-
     private ConstraintSet constraintSet1;
     private ConstraintSet constraintSet2;
     private AutoTransition transition;
@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             ImageView locationButton = (ImageView) mapFragment.getView().findViewById(2);
             RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-            // position on right bottom
             rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
             rlp.setMargins(0, 0, 30, 400);
@@ -313,7 +312,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .withRootViewYTranslation(3)
                 .inject();
 
-        slidingRootNav.getLayout().findViewById(R.id.darwer_text4).setOnClickListener(this);
+        slidingRootNav.getLayout().findViewById(R.id.darwer_text1).setOnClickListener(this);
+        slidingRootNav.getLayout().findViewById(R.id.darwer_text2).setOnClickListener(this);
 /*
         TMapView tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("df15431c-c688-49f4-b53a-6e5f56f0ed90");
@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 else constraintSet2.applyTo(constraintLayout);
                 bottomState = !bottomState;
                 break;
-            case R.id.darwer_text4:
+            case R.id.darwer_text1:
                 UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
                     @Override
                     public void onCompleteLogout() {
@@ -404,6 +404,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     }
                 });
+                break;
+            case R.id.darwer_text2:
+                Intent intent = new Intent(MainActivity.this, BookMarkActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
         }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="300dp">
+
+    <ImageView
+        android:id="@+id/bookmark_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:0.4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/bookmark_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="bookmark_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookmark_image"
+        app:layout_constraintBottom_toTopOf="@+id/bookmark_address"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="left|center_vertical"/>
+
+    <TextView
+        android:id="@+id/bookmark_address"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="bookmark_address"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookmark_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bookmark_opening"
+        android:gravity="left|center_vertical"/>
+
+    <TextView
+        android:id="@+id/bookmark_opening"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="bookmark_opening"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookmark_address"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="left|center_vertical"/>
+
+</android.support.constraint.ConstraintLayout>
