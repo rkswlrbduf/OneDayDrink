@@ -1,13 +1,11 @@
-package com.example.kyuyeol.onedaydrink
+package com.example.kyuyeol.onedaydrink.SplashActivity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
 import com.example.kyuyeol.onedaydrink.SignActivity.SignActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.kakao.auth.Session
-import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : Activity() {
 
@@ -17,7 +15,7 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_splash)
 
-        val currentUser = FirebaseAuth.getInstance().currentUser
+//        val currentUser = FirebaseAuth.getInstance().currentUser
 /*
 
         splash.postDelayed({
@@ -25,7 +23,7 @@ class SplashActivity : Activity() {
         }, 500)
 */
 
-        if (currentUser == null && !Session.getCurrentSession().checkAndImplicitOpen()) {
+        if (/*currentUser == null && */!Session.getCurrentSession().checkAndImplicitOpen()) {
             redirectToLoginActivity()
         }else {
             goToMainActivity()

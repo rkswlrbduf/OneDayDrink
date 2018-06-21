@@ -35,9 +35,12 @@ import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.example.kyuyeol.onedaydrink.BookMarkActivity.BookMarkActivity;
+import com.example.kyuyeol.onedaydrink.ContactActivity.ContactActivity;
+import com.example.kyuyeol.onedaydrink.EventActivity.EventActivity;
 import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
 import com.example.kyuyeol.onedaydrink.R;
 import com.example.kyuyeol.onedaydrink.SearchActivity.SearchActivity;
+import com.example.kyuyeol.onedaydrink.SettingActivity.SettingActivity;
 import com.example.kyuyeol.onedaydrink.SignActivity.SignActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -122,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationSettingsRequest.Builder locationSettingsRequest;
     private PendingResult<LocationSettingsResult> pendingResult;
 
+    private Intent intent;
+
     private LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -177,6 +182,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        locationManager.removeUpdates(locationListener);
     }
 
     @Override
@@ -314,6 +325,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         slidingRootNav.getLayout().findViewById(R.id.darwer_text1).setOnClickListener(this);
         slidingRootNav.getLayout().findViewById(R.id.darwer_text2).setOnClickListener(this);
+        slidingRootNav.getLayout().findViewById(R.id.darwer_text3).setOnClickListener(this);
+        slidingRootNav.getLayout().findViewById(R.id.darwer_text4).setOnClickListener(this);
+        slidingRootNav.getLayout().findViewById(R.id.darwer_text5).setOnClickListener(this);
 /*
         TMapView tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("df15431c-c688-49f4-b53a-6e5f56f0ed90");
@@ -361,6 +375,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.main_menu:
                 if (!slidingRootNav.isMenuOpened()) {
@@ -371,12 +386,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.main_search:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    intent = new Intent(MainActivity.this, SearchActivity.class);
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation(MainActivity.this, (View) mainSearch, "main_search_transition");
                     startActivity(intent, options.toBundle());
                 } else {
-                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    intent = new Intent(MainActivity.this, SearchActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -398,7 +413,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         //FirebaseAuth.getInstance().signOut();
                         //googleSignOut(); //google
                         //LoginManager.getInstance().logOut();
-                        Intent intent = new Intent(MainActivity.this, SignActivity.class);
+
+                        intent = new Intent(MainActivity.this, SignActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
@@ -406,7 +422,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
                 break;
             case R.id.darwer_text2:
-                Intent intent = new Intent(MainActivity.this, BookMarkActivity.class);
+                intent = new Intent(MainActivity.this, BookMarkActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.darwer_text3:
+                intent = new Intent(MainActivity.this, EventActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.darwer_text4:
+                intent = new Intent(MainActivity.this, ContactActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            case R.id.darwer_text5:
+                intent = new Intent(MainActivity.this, SettingActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;

@@ -49,12 +49,12 @@ class SignActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.google_login_custom -> {
+            /*R.id.google_login_custom -> {
                 signIn()
             }
             R.id.facebook_login_custom -> {
                 facebook_login.performClick()
-            }
+            }*/
             R.id.kakao_login_custom -> {
                 kakao_login.performClick()
             }
@@ -65,23 +65,24 @@ class SignActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
 
-        google_login_custom.setOnClickListener(this)
-        facebook_login_custom.setOnClickListener(this)
+        /*google_login_custom.setOnClickListener(this)
+        facebook_login_custom.setOnClickListener(this)*/
         kakao_login_custom.setOnClickListener(this)
 
         /**
          * 구글
          */
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(CLIENT_ID)
                 .requestEmail()
                 .build()
 
-        mGoogleSignInAccount = GoogleSignIn.getClient(this, gso)
+        mGoogleSignInAccount = GoogleSignIn.getClient(this, gso)*/
 
         /**
          * 페이스북
          */
+/*
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
@@ -109,6 +110,7 @@ class SignActivity : AppCompatActivity(), View.OnClickListener {
                 Log.w(TAG, exception.message)
             }
         })
+*/
 
         /**
          * 카카오톡
@@ -126,10 +128,12 @@ class SignActivity : AppCompatActivity(), View.OnClickListener {
      * 구글
      */
 
+/*
     fun signIn() {
         val signInIntent = mGoogleSignInAccount.getSignInIntent()
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
+*/
 
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {

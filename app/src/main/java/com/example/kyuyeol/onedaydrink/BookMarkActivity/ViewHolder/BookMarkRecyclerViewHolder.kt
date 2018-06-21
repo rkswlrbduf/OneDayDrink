@@ -1,4 +1,4 @@
-package com.example.kyuyeol.onedaydrink.BookMarkActivity
+package com.example.kyuyeol.onedaydrink.BookMarkActivity.ViewHolder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

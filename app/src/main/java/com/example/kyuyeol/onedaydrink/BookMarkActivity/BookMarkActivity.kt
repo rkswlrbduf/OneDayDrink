@@ -3,6 +3,7 @@ package com.example.kyuyeol.onedaydrink.BookMarkActivity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.example.kyuyeol.onedaydrink.BookMarkActivity.Adapter.BookMarkRecyclerViewAdapter
 import com.example.kyuyeol.onedaydrink.R
 import kotlinx.android.synthetic.main.activity_bookmark.*
 
