@@ -16,6 +16,7 @@ import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
 import com.example.kyuyeol.onedaydrink.MainActivity.MainClass.StoreInform
 import com.example.kyuyeol.onedaydrink.StoreActivity.StoreActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Math.abs
 
 class StoreTypeRecyclerViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
 
@@ -28,10 +29,11 @@ class StoreTypeRecyclerViewHolder(val view: View, val context: Context) : Recycl
 
     val intent = Intent(context, StoreActivity::class.java)
     val TAG = "StoreTypeRecycler_Log"
-    var mIsScrolling = false
 
-    var downX : Float = 0f
-    var downY : Float = 0f
+    var startX: Float? = null
+    var startY: Float? = null
+    var currentX: Float? = null
+    var currentY: Float? = null
 
     fun bind(list: ArrayList<String>) {
         view.little_title.setText(list[adapterPosition])
@@ -39,66 +41,42 @@ class StoreTypeRecyclerViewHolder(val view: View, val context: Context) : Recycl
         view.little_recyclerview.adapter = StoreRecyclerViewAdapter(context, storeList) { storeInform ->
             context.startActivity(intent)
         }
-        view.little_recyclerview.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+        view.little_recyclerview.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
             override fun onTouchEvent(rv: RecyclerView?, e: MotionEvent?) {
 
             }
 
-            override fun onInterceptTouchEvent(rv: RecyclerView?, ev: MotionEvent): Boolean {
+            override fun onInterceptTouchEvent(rv: RecyclerView?, e: MotionEvent?): Boolean {
 
-                val action = MotionEventCompat.getActionMasked(ev)
-
-                if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
-                    mIsScrolling = false
-                    return false
-                }
-
-                when (action) {
+                when(e?.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        mIsScrolling = false
-                        downX = ev.x
-                        downY = ev.y
-                        //Log.d(TAG, "ACTION_DOWN")
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        if (mIsScrolling) {
-                            return true
-                        }
-
-                        var xDiff = calculateDistanceX(downX, ev.x)
-                        var yDiff = calculateDistanceY(downY, ev.y)
-
-                        Log.d(TAG, "xDiff : " + xDiff + ", yDiff : " + yDiff)
-
-                        if (yDiff > xDiff) {
-                            Log.d(TAG, "VERTICAL")
-                            mIsScrolling = true
-                            return true
-                        }
+                        startX = e?.x
+                        startY = e?.y
                     }
                 }
+                currentX = e?.x
+                currentY = e?.y
+
+                var gapX = currentX!! - startX!!
+                var gapY = currentY!! - startY!!
+
+                if(abs(gapX) > abs(gapY)) {
+                    Log.d(TAG, "HORIZONTAL")
+                } else {
+                    Log.d(TAG, "VERTICAL")
+                }
+
+                Log.d(TAG, "" + abs(gapX) + ", " + abs(gapY))
+
                 return false
+
             }
 
             override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
 
             }
         })
-        /*view.little_recyclerview.setOnTouchListener(View.OnTouchListener { v, event ->
-            v.parent.requestDisallowInterceptTouchEvent(true);
-            return@OnTouchListener false
-        })*/
-    }
 
-    fun setOriginalMotionEvent(ev : MotionEvent){
-    }
-
-    fun calculateDistanceX(downX : Float, upX : Float) : Float {
-        return Math.abs(downX - upX)
-    }
-
-    fun calculateDistanceY(downY : Float, upY : Float) : Float {
-        return Math.abs(downY - upY)
     }
 
 }

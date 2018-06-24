@@ -26,6 +26,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,6 +43,13 @@ import com.example.kyuyeol.onedaydrink.R;
 import com.example.kyuyeol.onedaydrink.SearchActivity.SearchActivity;
 import com.example.kyuyeol.onedaydrink.SettingActivity.SettingActivity;
 import com.example.kyuyeol.onedaydrink.SignActivity.SignActivity;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.formats.NativeAdOptions;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -126,6 +134,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private PendingResult<LocationSettingsResult> pendingResult;
 
     private Intent intent;
+
+    /**
+     * Google AdMob
+     */
+    private InterstitialAd mInterstitialAd;
 
     private LocationListener locationListener = new LocationListener() {
         @Override
@@ -283,6 +296,41 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        MobileAds.initialize(this, "ca-app-pub-4893372814309338~7615626175");
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                mInterstitialAd.show();
+            }
+        });
+
+        AdLoader adLoader = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                    @Override
+                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                        // Show the ad.
+                    }
+                })
+                .withAdListener(new AdListener() {
+                    @Override
+                    public void onAdFailedToLoad(int errorCode) {
+                        // Handle the failure by logging, altering the UI, and so on.
+                    }
+                })
+                .withNativeAdOptions(new NativeAdOptions.Builder()
+                        // Methods in the NativeAdOptions.Builder class can be
+                        // used here to specify individual options settings.
+                        .build())
+                .build();
+
+        adLoader.loadAd(new AdRequest.Builder().build());
+
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             mEnableGps();
@@ -344,9 +392,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         bottomState = false;
         bottomBar.setOnClickListener(this);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerView1.setLayoutManager(layoutManager);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView1.setAdapter(new StoreTypeRecyclerViewAdapter(this, list));
+        recyclerView1.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
         backButton.setOnClickListener(this);
         filterButton.setOnClickListener(this);

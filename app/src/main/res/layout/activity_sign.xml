@@ -44,11 +44,11 @@
         app:layout_constraintLeft_toLeftOf="@id/sign_guide1"
         app:layout_constraintRight_toRightOf="@id/sign_guide2"
         app:layout_constraintTop_toBottomOf="@+id/google_login_custom" />
-
+-->
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/kakao_login"
         android:layout_width="0dp"
-        android:layout_height="0dp" />-->
+        android:layout_height="0dp" />
 
     <Button
         android:id="@+id/kakao_login_custom"
