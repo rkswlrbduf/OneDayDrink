@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher_round"
+            android:src="@drawable/image_loading"
             app:layout_constraintBottom_toTopOf="@+id/row_view"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintLeft_toLeftOf="parent"

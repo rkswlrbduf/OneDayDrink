@@ -11,6 +11,7 @@ import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import kotlinx.android.synthetic.main.activity_search.*
 import android.app.SharedElementCallback
 import android.os.Build
+import android.support.v7.widget.GridLayoutManager
 import android.transition.AutoTransition
 import android.transition.ChangeBounds
 import android.transition.ChangeTransform
@@ -48,11 +49,14 @@ class SearchActivity : AppCompatActivity(), Filterable {
                 slidingRootNav.closeMenu()
             }
         })
+
+        search_recyclerview.layoutManager = GridLayoutManager(this, 2)
+        search_recyclerview.adapter = SearchRecyclerViewAdapter(this)
+
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-
     }
 
     override fun attachBaseContext(newBase: Context) {
