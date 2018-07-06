@@ -39,6 +39,9 @@ import com.example.kyuyeol.onedaydrink.BookMarkActivity.BookMarkActivity;
 import com.example.kyuyeol.onedaydrink.ContactActivity.ContactActivity;
 import com.example.kyuyeol.onedaydrink.EventActivity.EventActivity;
 import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
+import com.example.kyuyeol.onedaydrink.MainActivity.MapData.ClusterNode;
+import com.example.kyuyeol.onedaydrink.MainActivity.MapData.NodeData;
+import com.example.kyuyeol.onedaydrink.MainActivity.MapData.ServerConnectService;
 import com.example.kyuyeol.onedaydrink.R;
 import com.example.kyuyeol.onedaydrink.SearchActivity.SearchActivity;
 import com.example.kyuyeol.onedaydrink.SettingActivity.SettingActivity;
@@ -65,7 +68,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
+import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.clustering.algo.GridBasedAlgorithm;
+import com.google.maps.android.clustering.algo.NonHierarchicalDistanceBasedAlgorithm;
+import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -73,10 +82,20 @@ import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.yarolegovich.slidingrootnav.callback.DragListener;
 
+import org.w3c.dom.Node;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, View.OnClickListener {
 
@@ -135,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private Intent intent;
 
+    private CustomClusterManager mClusterManager;
+
     /**
      * Google AdMob
      */
@@ -181,7 +202,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         mMap.setMyLocationEnabled(true);
         LatLng position = new LatLng(mLatitude, mLongitude);
+
+
+        mClusterManager = new CustomClusterManager<>(getApplicationContext(), mMap);
+
+
+        mMap.setOnCameraIdleListener(mClusterManager); //카메라 이동완료시 리스너(줌인/아웃 포함)
+        mMap.setOnMarkerClickListener(mClusterManager); // 클릭시 위치로 카메라 움직임(수정 가능 할듯)
+
+        DefaultClusterRenderer defaultClusterRenderer = new DefaultClusterRenderer<ClusterNode>(getApplicationContext(), mMap, mClusterManager);
+        defaultClusterRenderer.setMinClusterSize(2); // 최소 3개 이상 부터 클러스터링함
+
+        GridBasedAlgorithm gridBasedAlgorithm = new GridBasedAlgorithm(); //구역을 나눠서 클러스터링
+        NonHierarchicalDistanceBasedAlgorithm nonHierarchicalDistanceBasedAlgorithm = new NonHierarchicalDistanceBasedAlgorithm(); //거리 기반 클러스터링
+
+        mClusterManager.setRenderer(defaultClusterRenderer);
+        mClusterManager.setAlgorithm(nonHierarchicalDistanceBasedAlgorithm);
+        mClusterManager.setAnimation(false);
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
+
     }
 
     public void requestMyLocation() {
@@ -506,5 +546,74 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
         }
 
+    }
+
+    public class CustomClusterManager<ClusterNode extends ClusterItem> extends ClusterManager<ClusterNode> {
+        CameraPosition mPreviousCameraPosition;
+        List<NodeData.Data> result;
+        public  double lng_u, lng_d, lat_l, lat_r;
+
+        public CustomClusterManager(Context context, GoogleMap map) {
+            super(context, map);
+        }
+
+        public void requestServer(ServerConnectService service) {
+            Call<NodeData> request = service.getNodeDataFromServer("mapTest.php", lat_l, lat_r, lng_d, lng_u);
+            request.enqueue(new Callback<NodeData>() {
+                @Override
+                public void onResponse(Call<NodeData> call, Response<NodeData> response) {
+                    NodeData data = response.body();
+                    result = data.result;
+                    for (int i = 0; i < result.size(); i++) { // 데이터 받아온 만큼 마커표시(클러스터링)
+                        double lat = result.get(i).lat;
+                        double lng = result.get(i).lng;
+                        mClusterManager.addItem(new com.example.kyuyeol.onedaydrink.MainActivity.MapData.ClusterNode(new LatLng(lat, lng), "Node" + i));
+                    }
+                    CustomClusterManager.super.cluster();
+                }
+
+                @Override
+                public void onFailure(Call<NodeData> call, Throwable t) {
+                }
+            });
+        }
+        private OkHttpClient createOkHttpClient() {
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(interceptor);
+            return builder.build();
+        }
+
+        @Override
+        public void onCameraIdle() {
+
+            lng_u = mMap.getProjection().getVisibleRegion().latLngBounds.northeast.longitude; // 북동 경도
+            lat_r = mMap.getProjection().getVisibleRegion().latLngBounds.northeast.latitude; // 북동 위도
+            lng_d = mMap.getProjection().getVisibleRegion().latLngBounds.southwest.longitude; // 남서 경도
+            lat_l = mMap.getProjection().getVisibleRegion().latLngBounds.southwest.latitude; // 남서 위도
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://stou2.cafe24.com/test/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(createOkHttpClient())//http 로그 찍어주는 함수
+                    .build();
+            ServerConnectService service = retrofit.create(ServerConnectService.class);
+
+            if (super.getRenderer() instanceof GoogleMap.OnCameraIdleListener) {
+                ((GoogleMap.OnCameraIdleListener) super.getRenderer()).onCameraIdle();
+            }
+
+            CameraPosition position = mMap.getCameraPosition();
+            if (this.mPreviousCameraPosition == null) { // 지도 실행했을때
+                this.mPreviousCameraPosition = mMap.getCameraPosition();
+                requestServer(service);
+            }
+            else if (this.mPreviousCameraPosition.zoom != position.zoom || this.mPreviousCameraPosition.target != position.target) {// 카메라 줌이 바뀌거나 움직였을때
+                this.mPreviousCameraPosition = mMap.getCameraPosition();
+                mClusterManager.clearItems();//이전 아이템 비움
+                requestServer(service);
+            }
+        }
     }
 }
