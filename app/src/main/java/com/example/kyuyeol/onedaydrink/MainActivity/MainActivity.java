@@ -548,6 +548,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
     public class CustomClusterManager<ClusterNode extends ClusterItem> extends ClusterManager<ClusterNode> {
         CameraPosition mPreviousCameraPosition;
         List<NodeData.Data> result;
