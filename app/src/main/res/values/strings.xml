@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OneDayDrink</string>
+    <string name="app_name">술깃한제안</string>
     <string name="facebook_app_id">2065524333768851</string>
     <string name="fb_login_protocol_scheme">fb2065524333768851</string>
     <string name="kakao_app_key">df718292d57857b3ab7cf9436a9af769</string>
