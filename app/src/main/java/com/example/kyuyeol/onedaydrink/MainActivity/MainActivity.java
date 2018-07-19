@@ -45,7 +45,6 @@ import com.example.kyuyeol.onedaydrink.MainActivity.MapData.ServerConnectService
 import com.example.kyuyeol.onedaydrink.R;
 import com.example.kyuyeol.onedaydrink.SearchActivity.SearchActivity;
 import com.example.kyuyeol.onedaydrink.SettingActivity.SettingActivity;
-import com.example.kyuyeol.onedaydrink.SignActivity.SignActivity;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
@@ -81,8 +80,6 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.yarolegovich.slidingrootnav.callback.DragListener;
-
-import org.w3c.dom.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -517,9 +514,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         //googleSignOut(); //google
                         //LoginManager.getInstance().logOut();
 
-                        intent = new Intent(MainActivity.this, SignActivity.class);
+                        /*intent = new Intent(MainActivity.this, SignActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
+                        startActivity(intent);*/
 
                     }
                 });

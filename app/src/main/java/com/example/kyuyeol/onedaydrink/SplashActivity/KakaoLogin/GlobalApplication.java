@@ -1,4 +1,4 @@
-package com.example.kyuyeol.onedaydrink.SignActivity.KakaoLogin;
+package com.example.kyuyeol.onedaydrink.SplashActivity.KakaoLogin;
 
 import android.app.Activity;
 import android.app.Application;
