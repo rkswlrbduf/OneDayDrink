@@ -335,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ButterKnife.bind(this);
 
         MobileAds.initialize(this, "ca-app-pub-4893372814309338~7615626175");
+/*
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -367,6 +368,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .build();
 
         adLoader.loadAd(new AdRequest.Builder().build());
+*/
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {

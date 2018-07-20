@@ -15,4 +15,8 @@
     </string>
     <string name="login">로그인</string>
     <string name="find_password"><u>비밀번호 찾기</u></string>
+    <string name="login_underline"><u>로그인</u></string>
+    <string name="signin">가입하기</string>
+    <string name="signin_service_rule_text"><u>서비스이용약관</u></string>
+    <string name="signin_privacy_rule_text"><u>개인정보 취급방침</u></string>
 </resources>

@@ -29,12 +29,53 @@
         app:layout_constraintTop_toBottomOf="@+id/splash_logo"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <ImageView
+        android:id="@+id/splash_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/invalid_name"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/이미_회원이세요"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="6dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="23sp"
+        android:text="이미 회원이세요?"
+        android:textColor="#4a4a4a"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/fake_kakao_login"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/custom_login" />
+
+    <TextView
+        android:id="@+id/custom_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="23sp"
+        android:text="@string/login_underline"
+        android:textColor="#4a4a4a"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/fake_kakao_login"
+        app:layout_constraintLeft_toRightOf="@+id/이미_회원이세요"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/kakao_login"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/custom_login"
+        app:layout_constraintBottom_toTopOf="@+id/custom_signin"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -49,7 +90,7 @@
         android:layout_marginStart="40dp"
         android:background="@drawable/sign_button"
         android:backgroundTint="#ffde00"
-        app:layout_constraintBottom_toTopOf="@+id/custom_login"
+        app:layout_constraintBottom_toTopOf="@+id/custom_signin"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
@@ -57,12 +98,12 @@
             android:id="@+id/kakao_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
             android:src="@drawable/kakao_logo"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/kakao_text"
-            android:layout_marginRight="7dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -70,19 +111,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="0.03"
-            android:text="카카오톡 연결하기"
             android:lineSpacingExtra="22sp"
+            android:text="카카오톡 연결하기"
+            android:textColor="#3c1e1e"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/kakao_icon"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textColor="#3c1e1e"
-            android:textSize="13sp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/custom_login"
+        android:id="@+id/custom_signin"
         android:layout_width="280dp"
         android:layout_height="54dp"
         android:layout_marginBottom="68dp"
@@ -99,12 +140,12 @@
             android:id="@+id/email_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
             android:src="@drawable/mail"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/email_text"
-            android:layout_marginRight="7dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -112,14 +153,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="0.03"
-            android:text="이메일로 회원가입"
             android:lineSpacingExtra="22sp"
+            android:text="이메일로 회원가입"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/email_icon"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

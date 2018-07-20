@@ -6,11 +6,16 @@ import android.view.View
 import com.example.kyuyeol.onedaydrink.R
 import kotlinx.android.synthetic.main.activity_login.*
 import android.R.attr.password
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
+import com.example.kyuyeol.onedaydrink.SplashActivity.SplashActivity
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.kakao.usermgmt.StringSet.email
+import com.tsengvn.typekit.TypekitContextWrapper
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.Single
@@ -68,7 +73,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.login_close -> finish()
-            R.id.login_login -> Toast.makeText(this@LoginActivity, "GOOD", Toast.LENGTH_SHORT).show()
+            R.id.login_login -> {
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                finish()
+                overridePendingTransition(R.anim.anim_slide_in, R.anim.anim_slide_out)
+            }
         }
     }
 
@@ -130,6 +139,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         Log.d(this@LoginActivity.toString(), ""+ login_login.isEnabled)
     }
 
-
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase))
+    }
 
 }

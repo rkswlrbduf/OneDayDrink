@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/custom_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="49dp"
+        android:layout_marginTop="112dp"
+        android:letterSpacing="0.16"
+        android:lineSpacingExtra="1sp"
+        android:text="@string/signin"
+        android:textColor="#005c77"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/signin_close"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginTop="21dp"
+        android:src="@drawable/close"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signin_name_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="67dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_login">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signin_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#cbcbcb"
+            android:drawablePadding="17dp"
+            android:drawableStart="@drawable/mail"
+            android:hint="닉네임"
+            android:inputType="text"
+            android:paddingLeft="9dp"
+            android:textColorHint="#cbcbcb"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signin_email_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_name_layout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signin_email_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#cbcbcb"
+            android:drawablePadding="17dp"
+            android:drawableStart="@drawable/mail"
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="9dp"
+            android:textColorHint="#cbcbcb"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signin_password_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_email_layout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signin_password_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#cbcbcb"
+            android:drawablePadding="17dp"
+            android:drawableStart="@drawable/locked"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:paddingLeft="9dp"
+            android:textColorHint="#cbcbcb"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signin_password_confirm_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_password_layout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/signin_password_confirm_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#cbcbcb"
+            android:drawablePadding="17dp"
+            android:drawableStart="@drawable/locked"
+            android:hint="비밀번호 확인"
+            android:inputType="textPassword"
+            android:paddingLeft="9dp"
+            android:textColorHint="#cbcbcb"
+            android:textStyle="bold" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/signin_rule_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28.9dp"
+        android:backgroundTint="#cbcbcb"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/signin_service_rule"
+        app:layout_constraintTop_toBottomOf="@+id/signin_password_confirm_layout" />
+
+    <TextView
+        android:id="@+id/signin_service_rule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28.9dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="23sp"
+        android:text="@string/signin_service_rule_text"
+        android:textColor="#9b9b9b"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/signin_rule_check"
+        app:layout_constraintLeft_toRightOf="@+id/signin_rule_check"
+        app:layout_constraintRight_toLeftOf="@+id/signin_comma"
+        app:layout_constraintTop_toBottomOf="@+id/signin_password_confirm_layout" />
+
+    <TextView
+        android:id="@+id/signin_comma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28.9dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="23sp"
+        android:text=", "
+        android:textColor="#9b9b9b"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/signin_rule_check"
+        app:layout_constraintLeft_toRightOf="@+id/signin_service_rule"
+        app:layout_constraintRight_toLeftOf="@+id/signin_privacy_rule"
+        app:layout_constraintTop_toBottomOf="@+id/signin_password_confirm_layout" />
+
+    <TextView
+        android:id="@+id/signin_privacy_rule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28.9dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="23sp"
+        android:text="@string/signin_privacy_rule_text"
+        android:textColor="#9b9b9b"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/signin_rule_check"
+        app:layout_constraintLeft_toRightOf="@+id/signin_comma"
+        app:layout_constraintRight_toLeftOf="@+id/에_동의합니다"
+        app:layout_constraintTop_toBottomOf="@+id/signin_password_confirm_layout" />
+
+    <TextView
+        android:id="@+id/에_동의합니다"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28.9dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="23sp"
+        android:text="에 동의합니다."
+        android:textColor="#9b9b9b"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/signin_rule_check"
+        app:layout_constraintLeft_toRightOf="@+id/signin_privacy_rule"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_password_confirm_layout" />
+
+    <Button
+        android:id="@+id/signin_signin"
+        android:layout_width="280dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="47dp"
+        android:background="@drawable/sign_button"
+        android:text="@string/signin"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_rule_check" />
+
+</android.support.constraint.ConstraintLayout>

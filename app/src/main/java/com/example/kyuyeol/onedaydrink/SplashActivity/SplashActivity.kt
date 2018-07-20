@@ -12,6 +12,7 @@ import android.view.View
 import com.example.kyuyeol.onedaydrink.LoginActivity.LoginActivity
 import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
 import com.example.kyuyeol.onedaydrink.R
+import com.example.kyuyeol.onedaydrink.SignInActivity.SignInActivity
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.network.ErrorResult
@@ -34,6 +35,11 @@ class SplashActivity : Activity(), View.OnClickListener {
         when(v?.id) {
             R.id.custom_login -> {
                 startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                overridePendingTransition(R.anim.anim_slide_in, R.anim.anim_slide_out)
+            }
+            R.id.custom_signin -> {
+                startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
+                overridePendingTransition(R.anim.anim_slide_in, R.anim.anim_slide_out)
             }
         }
     }
@@ -42,9 +48,11 @@ class SplashActivity : Activity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash1)
 
+
         Session.getCurrentSession().addCallback(callback)
 
         custom_login.setOnClickListener(this)
+        custom_signin.setOnClickListener(this)
 
         Handler().postDelayed({
             if (!Session.getCurrentSession().checkAndImplicitOpen()) {
