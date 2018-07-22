@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="statusBarColor">#2A2E43</color>
+    <color name="buttion_enabled">#00d5d3</color>
+    <color name="buttion_not_enabled">#9b9b9b</color>
+    <color name="buttion_normal">#00d5d3</color>
 </resources>

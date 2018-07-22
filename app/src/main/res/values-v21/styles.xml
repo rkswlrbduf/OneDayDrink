@@ -8,8 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:statusBarColor">#00c6c6</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="colorControlActivated">#00d5d3</item>
     </style>
 
 

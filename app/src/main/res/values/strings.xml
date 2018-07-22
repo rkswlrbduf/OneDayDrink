@@ -1,9 +1,22 @@
 <resources>
-    <string name="app_name">OneDayDrink</string>
+    <string name="app_name">술깃한제안</string>
     <string name="facebook_app_id">2065524333768851</string>
     <string name="fb_login_protocol_scheme">fb2065524333768851</string>
     <string name="kakao_app_key">df718292d57857b3ab7cf9436a9af769</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="splash_name">
+        <font color='#005c77'>술</font>
+        <font color='#06a5a9'>깃</font>
+        <font color='#00c6c6'>한</font>
+        <font color='#333333'>제</font>
+        <font color='#333333'>안</font>
+    </string>
+    <string name="login">로그인</string>
+    <string name="find_password"><u>비밀번호 찾기</u></string>
+    <string name="login_underline"><u>로그인</u></string>
+    <string name="signin">가입하기</string>
+    <string name="signin_service_rule_text"><u>서비스이용약관</u></string>
+    <string name="signin_privacy_rule_text"><u>개인정보 취급방침</u></string>
 </resources>
