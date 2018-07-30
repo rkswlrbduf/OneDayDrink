@@ -7,5 +7,9 @@ public class NodeData {
     public class Data{
         public String name;
         public double lat,lng;
+        public String image;
+        public int beer;
+        public int soju;
+        public int sansachun;
     }
 }

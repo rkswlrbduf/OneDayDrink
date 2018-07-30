@@ -2,11 +2,12 @@ package com.example.kyuyeol.onedaydrink.MainActivity.Adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import kotlinx.android.synthetic.main.activity_main_list_item.view.*
 
 class MainActivityViewHolder(itemview : View) : RecyclerView.ViewHolder(itemview) {
 
-    fun bind() {
-
-    }
-
+    val store_container = itemview.main_store_container
+    val store_name = itemview.main_store_name
+    val store_image = itemview.main_store_image
+    val store_drink_container = itemview.main_store_drink_container
 }

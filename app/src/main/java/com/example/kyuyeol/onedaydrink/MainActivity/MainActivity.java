@@ -152,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Intent intent;
 
     private CustomClusterManager mClusterManager;
+    private SnapHelper helper;
+    private LinearLayoutManager layoutmanager;
 
     /**
      * Google AdMob
@@ -218,7 +220,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
 
     }
-
 
 
     public void requestMyLocation() {
@@ -336,12 +337,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         MobileAds.initialize(this, "ca-app-pub-4893372814309338~7615626175");
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new MainActivityAdapter(this));
+        layoutmanager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        SnapHelper helper = new LinearSnapHelper();
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutmanager);
+
+        helper = new LinearSnapHelper();
         helper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                recyclerView.findChildViewUnder()
+                Log.d(TAG, recyclerView.getChildAdapterPosition(helper.findSnapView(layoutmanager))+"OOOOO");
+            }
+        });
 
 /*
 
@@ -394,11 +410,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             requestMyLocation();
         }
 
-        materialMenu = new MaterialMenuDrawable(this, Color.GRAY, MaterialMenuDrawable.Stroke.THIN);
+        //materialMenu = new MaterialMenuDrawable(this, Color.GRAY, MaterialMenuDrawable.Stroke.THIN);
 
-        mainMenu.setImageDrawable(materialMenu);
+        //mainMenu.setImageDrawable(materialMenu);
 
-        slidingRootNav = new SlidingRootNavBuilder(this)
+        /*slidingRootNav = new SlidingRootNavBuilder(this)
                 .addDragListener(new DragListener() {
                     @Override
                     public void onDrag(float progress) {
@@ -423,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         slidingRootNav.getLayout().findViewById(R.id.darwer_text3).setOnClickListener(this);
         slidingRootNav.getLayout().findViewById(R.id.darwer_text4).setOnClickListener(this);
         slidingRootNav.getLayout().findViewById(R.id.darwer_text5).setOnClickListener(this);
-
+*/
 /*
         TMapView tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("df15431c-c688-49f4-b53a-6e5f56f0ed90");
@@ -578,6 +594,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         mClusterManager.addItem(new com.example.kyuyeol.onedaydrink.MainActivity.MapData.ClusterNode(new LatLng(lat, lng), "Node" + i));
                     }
                     CustomClusterManager.super.cluster();
+                    recyclerView.setAdapter(new MainActivityAdapter(MainActivity.this, result));
                 }
 
                 @Override

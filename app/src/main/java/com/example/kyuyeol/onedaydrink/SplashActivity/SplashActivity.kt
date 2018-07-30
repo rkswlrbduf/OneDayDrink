@@ -33,6 +33,7 @@ class SplashActivity : Activity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id) {
+            R.id.kakao_login -> kakao_login.performClick()
             R.id.custom_login -> {
                 startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                 overridePendingTransition(R.anim.anim_slide_in, R.anim.anim_slide_out)
@@ -48,11 +49,11 @@ class SplashActivity : Activity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash1)
 
-
         Session.getCurrentSession().addCallback(callback)
 
         custom_login.setOnClickListener(this)
         custom_signin.setOnClickListener(this)
+        kakao_login.setOnClickListener(this)
 
         Handler().postDelayed({
             if (!Session.getCurrentSession().checkAndImplicitOpen()) {
@@ -82,7 +83,7 @@ class SplashActivity : Activity(), View.OnClickListener {
     }
 
     private fun redirectMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this@SplashActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
@@ -113,7 +114,7 @@ class SplashActivity : Activity(), View.OnClickListener {
                 if (result.hasSignedUp() == OptionalBoolean.FALSE) {
 
                 } else {
-                    //redirectMainActivity()
+                    redirectMainActivity()
                 }
             }
         })
