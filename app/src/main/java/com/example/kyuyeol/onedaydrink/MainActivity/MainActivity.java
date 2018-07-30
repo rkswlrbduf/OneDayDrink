@@ -24,12 +24,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.example.kyuyeol.onedaydrink.BookMarkActivity.BookMarkActivity;
 import com.example.kyuyeol.onedaydrink.ContactActivity.ContactActivity;
 import com.example.kyuyeol.onedaydrink.EventActivity.EventActivity;
+import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.MainActivityAdapter;
 import com.example.kyuyeol.onedaydrink.MainActivity.Adapter.StoreTypeRecyclerViewAdapter;
 import com.example.kyuyeol.onedaydrink.MainActivity.MapData.ClusterNode;
 import com.example.kyuyeol.onedaydrink.MainActivity.MapData.NodeData;
@@ -67,8 +71,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.clustering.algo.GridBasedAlgorithm;
@@ -123,20 +129,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @BindView(R.id.constraint)
     ConstraintLayout constraintLayout;
-    @BindView(R.id.bottom_bar)
-    View bottomBar;
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerView1;
     @BindView(R.id.main_menu)
     ImageView mainMenu;
-    @BindView(R.id.around_store_back)
-    ImageButton backButton;
-    @BindView(R.id.around_store_filter)
-    ImageButton filterButton;
     @BindView(R.id.main_search)
     TextView mainSearchText;
     @BindView(R.id.main_search_container_cardview)
     CardView mainSearch;
+    @BindView(R.id.activity_main_listview)
+    RecyclerView recyclerView;
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -200,14 +200,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMyLocationEnabled(true);
         LatLng position = new LatLng(mLatitude, mLongitude);
 
-
         mClusterManager = new CustomClusterManager<>(getApplicationContext(), mMap);
-
 
         mMap.setOnCameraIdleListener(mClusterManager); //카메라 이동완료시 리스너(줌인/아웃 포함)
         mMap.setOnMarkerClickListener(mClusterManager); // 클릭시 위치로 카메라 움직임(수정 가능 할듯)
 
-        DefaultClusterRenderer defaultClusterRenderer = new DefaultClusterRenderer<ClusterNode>(getApplicationContext(), mMap, mClusterManager);
+        CustomClusterRenderer defaultClusterRenderer = new CustomClusterRenderer(getApplicationContext(), mMap, mClusterManager);
         defaultClusterRenderer.setMinClusterSize(2); // 최소 3개 이상 부터 클러스터링함
 
         GridBasedAlgorithm gridBasedAlgorithm = new GridBasedAlgorithm(); //구역을 나눠서 클러스터링
@@ -220,6 +218,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
 
     }
+
+
 
     public void requestMyLocation() {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -335,6 +335,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         ButterKnife.bind(this);
 
         MobileAds.initialize(this, "ca-app-pub-4893372814309338~7615626175");
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(new MainActivityAdapter(this));
+
+        SnapHelper helper = new LinearSnapHelper();
+        helper.attachToRecyclerView(recyclerView);
+
 /*
 
         mInterstitialAd = new InterstitialAd(this);
@@ -415,23 +423,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         slidingRootNav.getLayout().findViewById(R.id.darwer_text3).setOnClickListener(this);
         slidingRootNav.getLayout().findViewById(R.id.darwer_text4).setOnClickListener(this);
         slidingRootNav.getLayout().findViewById(R.id.darwer_text5).setOnClickListener(this);
+
 /*
         TMapView tmapview = new TMapView(this);
         tmapview.setSKTMapApiKey("df15431c-c688-49f4-b53a-6e5f56f0ed90");
         view.addView(tmapview);*/
 
-        constraintSet1 = new ConstraintSet();
+/*        constraintSet1 = new ConstraintSet();
         constraintSet1.clone(constraintLayout);
         constraintSet2 = new ConstraintSet();
         constraintSet2.clone(this, R.layout.activity_around_store);
 
         transition = new AutoTransition();
-        transition.setDuration(400);
+        transition.setDuration(400);*/
 
         bottomState = false;
-        bottomBar.setOnClickListener(this);
 
-        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        /*recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView1.setAdapter(new StoreTypeRecyclerViewAdapter(this, list));
         recyclerView1.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
@@ -451,7 +459,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         backButton.setOnClickListener(this);
-        filterButton.setOnClickListener(this);
+        filterButton.setOnClickListener(this);*/
         mainSearchText.setOnClickListener(this);
         mainMenu.setOnClickListener(this);
     }
@@ -547,12 +555,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-
-
-    public class CustomClusterManager<ClusterNode extends ClusterItem> extends ClusterManager<ClusterNode> {
+    private class CustomClusterManager<ClusterNode extends ClusterItem> extends ClusterManager<ClusterNode> {
         CameraPosition mPreviousCameraPosition;
         List<NodeData.Data> result;
-        public  double lng_u, lng_d, lat_l, lat_r;
+
+        public double lng_u, lng_d, lat_l, lat_r;
 
         public CustomClusterManager(Context context, GoogleMap map) {
             super(context, map);
@@ -578,6 +585,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             });
         }
+
         private OkHttpClient createOkHttpClient() {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -609,12 +617,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (this.mPreviousCameraPosition == null) { // 지도 실행했을때
                 this.mPreviousCameraPosition = mMap.getCameraPosition();
                 requestServer(service);
-            }
-            else if (this.mPreviousCameraPosition.zoom != position.zoom || this.mPreviousCameraPosition.target != position.target) {// 카메라 줌이 바뀌거나 움직였을때
+            } else if (this.mPreviousCameraPosition.zoom != position.zoom || this.mPreviousCameraPosition.target != position.target) {// 카메라 줌이 바뀌거나 움직였을때
                 this.mPreviousCameraPosition = mMap.getCameraPosition();
                 mClusterManager.clearItems();//이전 아이템 비움
                 requestServer(service);
             }
         }
     }
+
+    private class CustomClusterRenderer extends DefaultClusterRenderer<ClusterNode> {
+
+        public CustomClusterRenderer(Context context, GoogleMap map, ClusterManager<ClusterNode> clusterManager) {
+            super(context, map, clusterManager);
+        }
+
+        @Override
+        protected void onBeforeClusterItemRendered(ClusterNode item, MarkerOptions markerOptions) {
+            super.onBeforeClusterItemRendered(item, markerOptions);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+        }
+    }
+
 }

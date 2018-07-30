@@ -11,6 +11,7 @@ import android.content.Intent
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import com.example.kyuyeol.onedaydrink.FindPasswordActivity.FindPasswordActivity
 import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
 import com.example.kyuyeol.onedaydrink.SplashActivity.SplashActivity
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -78,6 +79,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
                 overridePendingTransition(R.anim.anim_slide_in, R.anim.anim_slide_out)
             }
+            R.id.login_find_password -> {
+                startActivity(Intent(this@LoginActivity, FindPasswordActivity::class.java))
+                finish()
+                overridePendingTransition(R.anim.anim_slide_in, R.anim.anim_slide_out)
+            }
         }
     }
 
@@ -86,13 +92,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_login)
 
         login_close.setOnClickListener(this)
+        login_find_password.setOnClickListener(this)
+        login_login.setOnClickListener(this)
 
         login_login.isEnabled = false
         login_login.setBackgroundResource(R.drawable.button_state)
 
         Log.d(this@LoginActivity.toString(), lengthGreaterThanSix.toString())
 
-        val emailChangeObservable = RxTextView.afterTextChangeEvents(login_email_text)
+        RxTextView.afterTextChangeEvents(login_email_text)
                 .skipInitialValue()
                 .map {
                     login_email_layout.error = null
@@ -109,7 +117,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 })
                 .subscribe({reactiveCheckCorrectData()})
 
-        val passwordChangeObservable = RxTextView.afterTextChangeEvents(login_password_text)
+        RxTextView.afterTextChangeEvents(login_password_text)
                 .skipInitialValue()
                 .map {
                     login_password_layout.error = null
@@ -124,8 +132,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     login_login.isEnabled = false
                 })
                 .subscribe({reactiveCheckCorrectData()})
-
-        login_login.setOnClickListener(this)
 
     }
 

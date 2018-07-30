@@ -14,9 +14,12 @@
         <font color='#333333'>안</font>
     </string>
     <string name="login">로그인</string>
-    <string name="find_password"><u>비밀번호 찾기</u></string>
+    <string name="find_password_underline"><u>비밀번호 찾기</u></string>
     <string name="login_underline"><u>로그인</u></string>
     <string name="signin">가입하기</string>
     <string name="signin_service_rule_text"><u>서비스이용약관</u></string>
     <string name="signin_privacy_rule_text"><u>개인정보 취급방침</u></string>
+    <string name="find_password_content">가입하신 이메일을 입력하시면\n비밀번호 변경 메일을 발송해드립니다.</string>
+    <string name="password_button">비밀번호 변경메일 받기</string>
+    <string name="find_password">비밀번호 찾기</string>
 </resources>
