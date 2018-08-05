@@ -30,6 +30,7 @@ import android.support.v7.widget.SnapHelper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -132,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @BindView(R.id.main_menu)
     ImageView mainMenu;
     @BindView(R.id.main_search)
-    TextView mainSearchText;
-    @BindView(R.id.main_search_container_cardview)
+    EditText mainSearchText;
+    @BindView(R.id.main_search_container)
     CardView mainSearch;
     @BindView(R.id.activity_main_listview)
     RecyclerView recyclerView;
@@ -154,6 +155,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private CustomClusterManager mClusterManager;
     private SnapHelper helper;
     private LinearLayoutManager layoutmanager;
+
+    private MainActivityAdapter adapter;
+
 
     /**
      * Google AdMob
@@ -345,19 +349,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         helper = new LinearSnapHelper();
         helper.attachToRecyclerView(recyclerView);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                recyclerView.findChildViewUnder()
-                Log.d(TAG, recyclerView.getChildAdapterPosition(helper.findSnapView(layoutmanager))+"OOOOO");
-            }
-        });
 
 /*
 
@@ -594,7 +585,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         mClusterManager.addItem(new com.example.kyuyeol.onedaydrink.MainActivity.MapData.ClusterNode(new LatLng(lat, lng), "Node" + i));
                     }
                     CustomClusterManager.super.cluster();
-                    recyclerView.setAdapter(new MainActivityAdapter(MainActivity.this, result));
+                    recyclerView.setAdapter(new MainActivityAdapter(result));
+                    recyclerView.scrollToPosition(1);
                 }
 
                 @Override
