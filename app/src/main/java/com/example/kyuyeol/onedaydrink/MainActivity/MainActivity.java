@@ -382,7 +382,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     recyclerView.setAdapter(new MainActivityAdapter(result));
                     recyclerView.scrollToPosition(1);
                 }
-
                 @Override
                 public void onFailure(Call<NodeData> call, Throwable t) {
                 }

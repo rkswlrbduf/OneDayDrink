@@ -9,18 +9,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#2a2e43"
         android:descendantFocusability="blocksDescendants">
 
         <ImageView
             android:id="@+id/drink_image"
             android:layout_width="0dp"
-            android:layout_height="326dp"
-            android:alpha="0.52"
+            android:layout_height="222dp"
             android:foreground="@drawable/image_gradient"
             android:scaleType="centerCrop"
-            android:src="@mipmap/app_icon"
-            app:layout_constraintBottom_toTopOf="@+id/drink_name"
+            android:src="@color/com_facebook_button_login_background_color"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -30,62 +27,252 @@
             android:id="@+id/drink_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="140dp"
-            android:lineSpacingExtra="4sp"
-            android:text="왕코 등갈비"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="136dp"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="5sp"
+            android:text="한성포차"
             android:textColor="#ffffff"
-            android:textSize="37sp"
-            app:fontName="Custom1"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
+        <include
+            android:id="@+id/main_store_drink_beer"
+            layout="@layout/main_store_drink_beer"
+            android:layout_width="21.7dp"
+            android:layout_height="11.6dp"
+            android:layout_marginLeft="37dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/drink_name" />
+
+        <include
+            android:id="@+id/main_store_drink_soju"
+            layout="@layout/main_store_drink_soju"
+            android:layout_width="21.7dp"
+            android:layout_height="11.6dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintLeft_toRightOf="@+id/main_store_drink_beer"
+            app:layout_constraintTop_toBottomOf="@+id/drink_name" />
+
+        <include
+            android:id="@+id/main_store_drink_sansachun"
+            layout="@layout/main_store_drink_sansachun"
+            android:layout_width="21.7dp"
+            android:layout_height="11.6dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintLeft_toRightOf="@+id/main_store_drink_soju"
+            app:layout_constraintTop_toBottomOf="@+id/drink_name" />
+
         <TextView
             android:id="@+id/매장소개"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginTop="73dp"
-            android:lineSpacingExtra="3sp"
-            android:text="매장 소개"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            app:fontName="Custom1"
+            android:layout_width="57dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="29dp"
+            android:lineSpacingExtra="6sp"
+            android:text="매장소개"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/drink_name"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toBottomOf="@+id/drink_image" />
 
         <TextView
             android:id="@+id/store_intro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="34dp"
             android:layout_marginTop="13.8dp"
-            android:lineSpacingExtra="9sp"
+            android:lineSpacingExtra="8sp"
             android:text="곱창과 대창, 염통, 막창, 특양구이는 하루에 한가지 맛씩 각각의 맛을 오롯이 즐기고자 하는 분들은 단품으로도 즐길 수 있습니다. 하지만 다양한 맛을 한 번에 즐기고 싶은 분들을 위해 모둠메뉴도 다양하게 구성이 되어 있습니다."
-            android:textColor="#ffffff"
-            android:textSize="13sp"
-            app:fontName="Custom2"
+            android:textColor="#4a4a4a"
+            android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/매장소개"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toBottomOf="@+id/매장소개" />
 
-        <View
-            android:id="@+id/경계선1"
+        <ImageView
+            android:id="@+id/store_address_icon"
+            android:layout_width="18dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/marker"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_intro" />
+
+        <TextView
+            android:id="@+id/store_address_text"
             android:layout_width="0dp"
-            android:layout_height="1.5dp"
+            android:layout_height="23dp"
             android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="13.9dp"
-            android:alpha="0.05"
-            android:background="#ffffff"
+            android:layout_marginTop="21dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="8sp"
+            android:textColor="#4a4a4a"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/store_address_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_intro"
+            tools:text="서울특별시 용산구 청파동 2가" />
+
+        <ImageView
+            android:id="@+id/store_call_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/call"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_address_icon" />
+
+        <TextView
+            android:id="@+id/store_call_number"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="17dp"
+            android:gravity="center_vertical"
+            app:layout_constraintLeft_toRightOf="@+id/store_call_icon"
+            app:layout_constraintTop_toBottomOf="@+id/store_address_text"
+            tools:text="02-3333-3333" />
+
+        <Button
+            android:id="@+id/store_call_button"
+            android:layout_width="73dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/white_5dp"
+            android:backgroundTint="#00d5d3"
+            android:lineSpacingExtra="10sp"
+            android:text="전화하기"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toRightOf="@+id/store_call_number"
+            app:layout_constraintTop_toBottomOf="@+id/store_address_text" />
+
+        <ImageView
+            android:id="@+id/store_time_icon"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="19dp"
+            android:src="@drawable/time"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_call_icon" />
+
+        <TextView
+            android:id="@+id/store_day_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="17dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="8sp"
+            android:textColor="#4a4a4a"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/store_time_icon"
+            app:layout_constraintTop_toBottomOf="@+id/store_call_number"
+            tools:text="평일 00시00분 - 22시22분" />
+
+        <TextView
+            android:id="@+id/store_end_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="8sp"
+            android:textColor="#4a4a4a"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/store_time_icon"
+            app:layout_constraintTop_toBottomOf="@+id/store_day_time_text"
+            tools:text="주말 00시00분 - 00시00분" />
+
+        <TextView
+            android:id="@+id/메뉴"
+            android:layout_width="33dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="47dp"
+            android:lineSpacingExtra="6sp"
+            android:text="메뉴"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_time_icon" />
+
+        <include
+            android:id="@+id/store_image_menu_1"
+            layout="@layout/store_image_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintDimensionRatio="141:150.1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintRight_toLeftOf="@+id/store_image_menu_2"
+            app:layout_constraintTop_toBottomOf="@+id/메뉴" />
+
+        <include
+            android:id="@+id/store_image_menu_2"
+            layout="@layout/store_image_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="34dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintDimensionRatio="141:150.1"
+            app:layout_constraintLeft_toRightOf="@+id/store_image_menu_1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/메뉴" />
+
+        <include
+            android:id="@+id/store_image_menu_3"
+            layout="@layout/store_image_menu"
+            android:layout_width="141dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/store_image_menu_4"
+            app:layout_constraintTop_toBottomOf="@+id/store_image_menu_1" />
+
+        <include
+            android:id="@+id/store_image_menu_4"
+            layout="@layout/store_image_menu"
+            android:layout_width="141dp"
+            android:layout_height="150dp"
+            android:layout_marginRight="34dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintLeft_toRightOf="@+id/store_image_menu_3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/store_image_menu_2" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/store_menu_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="34dp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/store_intro"></View>
-
+            app:layout_constraintTop_toBottomOf="@+id/store_image_menu_3" />
+        <!--
         <android.support.constraint.ConstraintLayout
             android:id="@+id/store_call_container"
             android:layout_width="0dp"
@@ -93,7 +280,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/경계선1">
+            app:layout_constraintTop_toBottomOf="@+id/store_intro">
 
             <ImageView
                 android:id="@+id/call_icon"
@@ -342,7 +529,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/제공주류"
             tools:listitem="@layout/store_drink_row" />
-
+-->
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

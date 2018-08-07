@@ -19,24 +19,22 @@ class MainActivityAdapter(val list: List<NodeData.Data>) : RecyclerView.Adapter<
     var context : Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainActivityViewHolder {
-        Trace.beginSection("Adapter onCreateViewHolder")
         context = parent.context
         val view = MainActivityViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_main_list_item, parent, false))
         if(viewType == INVISIBLE_VIEW) view.store_container.visibility = INVISIBLE
-        Trace.endSection()
+
         return view
     }
 
     override fun onBindViewHolder(holder: MainActivityViewHolder, position: Int) {
-        Trace.beginSection("Adapter onBindViewHolder" + position)
+        Log.w("TAG", "ONBINDVIEWHOLDER")
         if (position != 0 && position != list.size + 1) {
             holder.store_name.text = list[position - 1].name
-            Glide.with(context!!).load("http://stou2.cafe24.com/image/" + list[position - 1].image + ".jpg").apply(RequestOptions().centerCrop()).thumbnail(0.1f).into(holder.store_image)
+            Glide.with(context!!).load("http://stou2.cafe24.com/image/" + list[position - 1].image + ".jpg").apply(RequestOptions().centerCrop()).thumbnail(0.01f).into(holder.store_image)
             if (list[position - 1].beer == 0) holder.store_drink_beer.visibility = View.GONE
             if (list[position - 1].soju == 0) holder.store_drink_soju.visibility = View.GONE
             if (list[position - 1].sansachun == 0) holder.store_drink_sansachun.visibility = View.GONE
         }
-        Trace.endSection()
     }
 
     override fun getItemCount(): Int {
@@ -44,7 +42,7 @@ class MainActivityAdapter(val list: List<NodeData.Data>) : RecyclerView.Adapter<
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position == 0 || position == position + 1) return INVISIBLE_VIEW
+        if (position == 0 || position == list.size + 1) return INVISIBLE_VIEW
         return super.getItemViewType(position)
     }
 }
