@@ -101,7 +101,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, View.OnClickListener, LocationListener {
 
     private static final String TAG = "MainActivity_Log";
     public static final int REQUEST_LOCATION = 001;
@@ -110,23 +110,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     GoogleSignInClient mGoogleSignInAccount;
     GoogleSignInOptions gso;*/
-
-    private ArrayList<String> list = new ArrayList<String>() {{
-        add("고깃집");
-        add("초밥집");
-        add("술집");
-        add("감자집");
-        add("치즈집");
-        add("치킨집");
-    }};
-
-    boolean bottomState;
-
-    private ConstraintSet constraintSet1;
-    private ConstraintSet constraintSet2;
-    private AutoTransition transition;
-    private MaterialMenuDrawable materialMenu;
-    SlidingRootNav slidingRootNav;
 
     @BindView(R.id.constraint)
     ConstraintLayout constraintLayout;
@@ -156,46 +139,37 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private SnapHelper helper;
     private LinearLayoutManager layoutmanager;
 
-    private MainActivityAdapter adapter;
+    @Override
+    public void onLocationChanged(Location location) {
+        locationManager.removeUpdates(this);
 
+        mLatitude = location.getLatitude();
+        mLongitude = location.getLongitude();
 
-    /**
-     * Google AdMob
-     */
-    private InterstitialAd mInterstitialAd;
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(MainActivity.this);
 
-    private LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            locationManager.removeUpdates(locationListener);
+        ImageView locationButton = (ImageView) mapFragment.getView().findViewById(2);
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        rlp.setMargins(0, 0, 30, 400);
+    }
 
-            mLatitude = location.getLatitude();
-            mLongitude = location.getLongitude();
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-            mapFragment.getMapAsync(MainActivity.this);
+    }
 
-            ImageView locationButton = (ImageView) mapFragment.getView().findViewById(2);
-            RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-            rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-            rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            rlp.setMargins(0, 0, 30, 400);
+    @Override
+    public void onProviderEnabled(String provider) {
 
-        }
+    }
 
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            Log.d("gps", "onStatusChanged");
-        }
+    @Override
+    public void onProviderDisabled(String provider) {
 
-        @Override
-        public void onProviderEnabled(String provider) {
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-        }
-    };
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -225,24 +199,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-
     public void requestMyLocation() {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
 
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.removeUpdates(locationListener);
+        locationManager.removeUpdates(this);
     }
 
     @Override
@@ -339,8 +312,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         ButterKnife.bind(this);
 
-        MobileAds.initialize(this, "ca-app-pub-4893372814309338~7615626175");
-
         layoutmanager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         recyclerView.setHasFixedSize(true);
@@ -349,140 +320,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         helper = new LinearSnapHelper();
         helper.attachToRecyclerView(recyclerView);
 
-
-/*
-
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                mInterstitialAd.show();
-            }
-        });
-
-        AdLoader adLoader = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        // Show the ad.
-                    }
-                })
-                .withAdListener(new AdListener() {
-                    @Override
-                    public void onAdFailedToLoad(int errorCode) {
-                        // Handle the failure by logging, altering the UI, and so on.
-                    }
-                })
-                .withNativeAdOptions(new NativeAdOptions.Builder()
-                        // Methods in the NativeAdOptions.Builder class can be
-                        // used here to specify individual options settings.
-                        .build())
-                .build();
-
-        adLoader.loadAd(new AdRequest.Builder().build());
-*/
-
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             mEnableGps();
         }
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                requestMyLocation();
-            } else {
-                requestMyLocation();
-            }
-        } else {
-            requestMyLocation();
+        if (Build.VERSION.SDK_INT >= 23 && (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
+        requestMyLocation();
 
-        //materialMenu = new MaterialMenuDrawable(this, Color.GRAY, MaterialMenuDrawable.Stroke.THIN);
-
-        //mainMenu.setImageDrawable(materialMenu);
-
-        /*slidingRootNav = new SlidingRootNavBuilder(this)
-                .addDragListener(new DragListener() {
-                    @Override
-                    public void onDrag(float progress) {
-                        materialMenu.setTransformationOffset(
-                                MaterialMenuDrawable.AnimationState.BURGER_ARROW,
-                                progress
-                        );
-                    }
-                })
-                .withMenuLayout(R.layout.activity_main_drawer)
-                .withSavedState(savedInstanceState)
-                .withMenuOpened(false)
-                .withContentClickableWhenMenuOpened(false)
-                .withDragDistance(140)
-                .withRootViewScale(0.8f)
-                .withRootViewElevation(3)
-                .withRootViewYTranslation(3)
-                .inject();
-
-        slidingRootNav.getLayout().findViewById(R.id.darwer_text1).setOnClickListener(this);
-        slidingRootNav.getLayout().findViewById(R.id.darwer_text2).setOnClickListener(this);
-        slidingRootNav.getLayout().findViewById(R.id.darwer_text3).setOnClickListener(this);
-        slidingRootNav.getLayout().findViewById(R.id.darwer_text4).setOnClickListener(this);
-        slidingRootNav.getLayout().findViewById(R.id.darwer_text5).setOnClickListener(this);
-*/
-/*
-        TMapView tmapview = new TMapView(this);
-        tmapview.setSKTMapApiKey("df15431c-c688-49f4-b53a-6e5f56f0ed90");
-        view.addView(tmapview);*/
-
-/*        constraintSet1 = new ConstraintSet();
-        constraintSet1.clone(constraintLayout);
-        constraintSet2 = new ConstraintSet();
-        constraintSet2.clone(this, R.layout.activity_around_store);
-
-        transition = new AutoTransition();
-        transition.setDuration(400);*/
-
-        bottomState = false;
-
-        /*recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView1.setAdapter(new StoreTypeRecyclerViewAdapter(this, list));
-        recyclerView1.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
-
-        backButton.setOnClickListener(this);
-        filterButton.setOnClickListener(this);*/
         mainSearchText.setOnClickListener(this);
         mainMenu.setOnClickListener(this);
-    }
-
-/*    public void googleSignOut() {
-        mGoogleSignInAccount.signOut().addOnCompleteListener(MainActivity.this, null);
-    }*/
-
-    @Override
-    public void onBackPressed() {
-        if (!bottomState) super.onBackPressed();
-        else {
-            TransitionManager.beginDelayedTransition(constraintLayout, transition);
-            constraintSet1.applyTo(constraintLayout);
-            bottomState = !bottomState;
-        }
     }
 
     @Override
@@ -492,15 +341,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
-            case R.id.main_menu:
-                if (!slidingRootNav.isMenuOpened()) {
-                    slidingRootNav.openMenu();
-                } else {
-                    slidingRootNav.closeMenu();
-                }
-                break;
             case R.id.main_search:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     intent = new Intent(MainActivity.this, SearchActivity.class);
@@ -512,54 +353,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     startActivity(intent);
                 }
                 break;
-            case R.id.around_store_filter:
-                break;
-            case R.id.around_store_back:
-                onBackPressed();
-                break;
-            case R.id.bottom_bar:
-                TransitionManager.beginDelayedTransition(constraintLayout, transition);
-                if (bottomState) constraintSet1.applyTo(constraintLayout);
-                else constraintSet2.applyTo(constraintLayout);
-                bottomState = !bottomState;
-                break;
-            case R.id.darwer_text1:
-                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-                    @Override
-                    public void onCompleteLogout() {
-                        //FirebaseAuth.getInstance().signOut();
-                        //googleSignOut(); //google
-                        //LoginManager.getInstance().logOut();
-
-                        /*intent = new Intent(MainActivity.this, SignActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);*/
-
-                    }
-                });
-                break;
-            case R.id.darwer_text2:
-                intent = new Intent(MainActivity.this, BookMarkActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                break;
-            case R.id.darwer_text3:
-                intent = new Intent(MainActivity.this, EventActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                break;
-            case R.id.darwer_text4:
-                intent = new Intent(MainActivity.this, ContactActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                break;
-            case R.id.darwer_text5:
-                intent = new Intent(MainActivity.this, SettingActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                break;
         }
-
     }
 
     private class CustomClusterManager<ClusterNode extends ClusterItem> extends ClusterManager<ClusterNode> {
@@ -631,19 +425,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mClusterManager.clearItems();//이전 아이템 비움
                 requestServer(service);
             }
-        }
-    }
-
-    private class CustomClusterRenderer extends DefaultClusterRenderer<ClusterNode> {
-
-        public CustomClusterRenderer(Context context, GoogleMap map, ClusterManager<ClusterNode> clusterManager) {
-            super(context, map, clusterManager);
-        }
-
-        @Override
-        protected void onBeforeClusterItemRendered(ClusterNode item, MarkerOptions markerOptions) {
-            super.onBeforeClusterItemRendered(item, markerOptions);
-            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
         }
     }
 
