@@ -21,7 +21,7 @@
         android:background="#353a50">
 
         <ImageView
-            android:id="@+id/drink_image"
+            android:id="@+id/store_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
@@ -40,12 +40,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/drink_image"
+            app:layout_constraintTop_toBottomOf="@+id/store_image"
             app:layout_constraintVertical_weight="30" />
 
         <TextView
             android:layout_marginTop="10dp"
-            android:id="@+id/drink_name"
+            android:id="@+id/store_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="3dp"
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toTopOf="@+id/menu_price"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/drink_image"
+            app:layout_constraintTop_toBottomOf="@+id/store_image"
             tools:text="감자 튀김" />
 
         <TextView
@@ -76,7 +76,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/drink_name"
+            app:layout_constraintTop_toBottomOf="@+id/store_name"
             tools:text="5000원">
 
         </TextView>

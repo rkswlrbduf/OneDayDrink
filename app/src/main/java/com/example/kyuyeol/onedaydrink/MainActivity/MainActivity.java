@@ -50,6 +50,7 @@ import com.example.kyuyeol.onedaydrink.MainActivity.MapData.ServerConnectService
 import com.example.kyuyeol.onedaydrink.R;
 import com.example.kyuyeol.onedaydrink.SearchActivity.SearchActivity;
 import com.example.kyuyeol.onedaydrink.SettingActivity.SettingActivity;
+import com.example.kyuyeol.onedaydrink.StoreActivity.StoreActivity;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
@@ -356,6 +357,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    public interface onItemClickListener {
+        void onItemClick(NodeData.Data data);
+    }
+
     private class CustomClusterManager<ClusterNode extends ClusterItem> extends ClusterManager<ClusterNode> {
         CameraPosition mPreviousCameraPosition;
         List<NodeData.Data> result;
@@ -379,7 +384,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         mClusterManager.addItem(new com.example.kyuyeol.onedaydrink.MainActivity.MapData.ClusterNode(new LatLng(lat, lng), "Node" + i));
                     }
                     CustomClusterManager.super.cluster();
-                    recyclerView.setAdapter(new MainActivityAdapter(result));
+                    recyclerView.setAdapter(new MainActivityAdapter(result, new onItemClickListener() {
+                        @Override
+                        public void onItemClick(NodeData.Data data) {
+                            Intent intent = new Intent(MainActivity.this, StoreActivity.class);
+                            intent.putExtra(Intent.EXTRA_TEXT, data.name);
+                            startActivity(intent);
+                        }
+                    }));
                     recyclerView.scrollToPosition(1);
                 }
                 @Override

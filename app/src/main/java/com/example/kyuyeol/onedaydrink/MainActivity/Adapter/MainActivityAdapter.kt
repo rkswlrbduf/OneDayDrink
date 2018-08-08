@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
+import android.widget.AdapterView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.kyuyeol.onedaydrink.MainActivity.MainActivity
 import com.example.kyuyeol.onedaydrink.MainActivity.MapData.NodeData
 import com.example.kyuyeol.onedaydrink.R
 
-class MainActivityAdapter(val list: List<NodeData.Data>) : RecyclerView.Adapter<MainActivityViewHolder>() {
+class MainActivityAdapter(val list: List<NodeData.Data>, val clickListener : MainActivity.onItemClickListener) : RecyclerView.Adapter<MainActivityViewHolder>() {
 
     val INVISIBLE_VIEW = 1
     var context : Context? = null
@@ -22,18 +24,13 @@ class MainActivityAdapter(val list: List<NodeData.Data>) : RecyclerView.Adapter<
         context = parent.context
         val view = MainActivityViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_main_list_item, parent, false))
         if(viewType == INVISIBLE_VIEW) view.store_container.visibility = INVISIBLE
-
         return view
     }
 
     override fun onBindViewHolder(holder: MainActivityViewHolder, position: Int) {
         Log.w("TAG", "ONBINDVIEWHOLDER")
         if (position != 0 && position != list.size + 1) {
-            holder.store_name.text = list[position - 1].name
-            Glide.with(context!!).load("http://stou2.cafe24.com/image/" + list[position - 1].image + ".jpg").apply(RequestOptions().centerCrop()).thumbnail(0.01f).into(holder.store_image)
-            if (list[position - 1].beer == 0) holder.store_drink_beer.visibility = View.GONE
-            if (list[position - 1].soju == 0) holder.store_drink_soju.visibility = View.GONE
-            if (list[position - 1].sansachun == 0) holder.store_drink_sansachun.visibility = View.GONE
+            holder.bind(list[position-1], clickListener)
         }
     }
 

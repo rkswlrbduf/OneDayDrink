@@ -8,7 +8,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
-            android:id="@+id/drink_image"
+            android:id="@+id/store_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
@@ -21,7 +21,7 @@
             app:layout_constraintVertical_weight="87" />
 
         <TextView
-            android:id="@+id/drink_name"
+            android:id="@+id/store_name"
             app:layout_constraintDimensionRatio="2:1"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/drink_image"
+            app:layout_constraintTop_toBottomOf="@+id/store_image"
             android:layout_marginBottom="3dp"
             app:layout_constraintVertical_chainStyle="packed" />
 

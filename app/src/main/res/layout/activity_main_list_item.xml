@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/main_store_image" />
 
         <include
-            android:id="@+id/main_store_drink_beer"
+            android:id="@+id/store_store_drink_beer"
             layout="@layout/main_store_drink_beer"
             android:layout_width="21.7dp"
             android:layout_height="11.6dp"
@@ -47,24 +47,24 @@
             app:layout_constraintTop_toBottomOf="@+id/main_store_name" />
 
         <include
-            android:id="@+id/main_store_drink_soju"
+            android:id="@+id/store_store_drink_soju"
             layout="@layout/main_store_drink_soju"
             android:layout_width="21.7dp"
             android:layout_height="11.6dp"
             android:layout_marginLeft="2.8dp"
             android:layout_marginRight="2.8dp"
             android:layout_marginTop="6.7dp"
-            app:layout_constraintLeft_toRightOf="@+id/main_store_drink_beer"
+            app:layout_constraintLeft_toRightOf="@+id/store_store_drink_beer"
             app:layout_constraintTop_toBottomOf="@+id/main_store_name" />
 
         <include
-            android:id="@+id/main_store_drink_sansachun"
+            android:id="@+id/store_store_drink_sansachun"
             layout="@layout/main_store_drink_sansachun"
             android:layout_width="21.7dp"
             android:layout_height="11.6dp"
             android:layout_marginLeft="2.8dp"
             android:layout_marginTop="6.7dp"
-            app:layout_constraintLeft_toRightOf="@+id/main_store_drink_soju"
+            app:layout_constraintLeft_toRightOf="@+id/store_store_drink_soju"
             app:layout_constraintTop_toBottomOf="@+id/main_store_name" />
 
 

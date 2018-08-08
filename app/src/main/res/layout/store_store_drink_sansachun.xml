@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/store_store_drink_beer"
-    android:layout_width="21.7dp"
-    android:layout_height="11.6dp"
+    android:layout_width="33dp"
+    android:layout_height="14dp"
     android:background="@drawable/drink_container"
-    android:backgroundTint="#2a9500"
+    android:backgroundTint="#c71128"
     android:gravity="center"
-    android:text="소주"
+    android:text="산사춘"
     android:textColor="#ffffff"
-    android:textSize="7sp" />
+    android:textSize="9sp" />
